@@ -20,6 +20,7 @@ class SubMenu extends Model
         'action',
         'menu_id',
         'order',
+        'icon'
     ];
 
     protected $dates = [

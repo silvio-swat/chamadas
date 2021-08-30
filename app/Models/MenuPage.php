@@ -17,6 +17,7 @@ class MenuPage extends Model
     protected $fillable = [
         'name',
         'order',
+        'icon'
     ];
 
     protected $dates = [

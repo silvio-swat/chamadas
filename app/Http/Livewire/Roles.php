@@ -33,7 +33,6 @@ class Roles extends Component
         dd('teste delete');
         $result = Role::find($key)->delete();
         $this->roles = Role::all();
-
     }       
     
     public function edit($key)

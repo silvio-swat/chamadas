@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Livewire\LwMenu;
+use App\Http\Livewire\LwUser;
+use App\Http\Livewire\UserRole;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,11 +22,10 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth']], function(){
-    Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')
-    ->name('dashboard');
-    Route::get('/user-role' , App\Http\Livewire\UserRole::class);
-    Route::get('/menu' , App\Http\Livewire\LwMenu::class);
-     
+    Route::get('/dashboard' , [DashboardController::class,'index'])->name('dashboard');
+    Route::get('/user-role' , UserRole::class);
+    Route::get('/menu'      , LwMenu::class);
+    Route::get('/users'     , LwUser::class);
 });
 
 require __DIR__.'/auth.php';
