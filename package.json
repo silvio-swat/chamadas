@@ -27,6 +27,7 @@
         "tailwindcss": "^2.2.7"
     },
     "dependencies": {
+        "font-awesome": "^4.7.0",
         "turbolinks": "^5.2.0"
     }
 }

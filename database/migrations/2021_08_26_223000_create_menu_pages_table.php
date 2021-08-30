@@ -16,7 +16,8 @@ class CreateMenuPagesTable extends Migration
         Schema::create('menu_pages', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->integer('order')->unique();
+            $table->integer('order');
+            $table->string('icon')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

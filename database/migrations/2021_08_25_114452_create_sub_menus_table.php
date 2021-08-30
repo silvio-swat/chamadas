@@ -15,11 +15,12 @@ class CreateSubMenusTable extends Migration
     {
         Schema::create('sub_menus', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();;
+            $table->string('name');
             $table->string('controller');
             $table->string('action')->nullable();
-            $table->integer('order')->unique();
+            $table->integer('order');
             $table->string('menu_id')->constrained();
+            $table->string('icon')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
