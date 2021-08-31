@@ -1,29 +1,21 @@
     <!-------------------------------   HTML do modal para testar o Alpine ---------------------------->
     <!-- onclick="openModal(true)" -->
     <div x-data="{ isOpen: {{ $modalOpen }} }">
-      {{-- <div class="p-3">
-          <button  class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded text-white focus:outline-none"
-            @click="isOpen = true"
-          >
-            Open Modal
-          </button>
-      </div> --}}
       
       <!-- overlay transition-opacity transition-transform  -->
       <div 
-      x-show="isOpen" 
+      x-show="isOpen" x-cloak
       x-transition:enter="transition duration-300 transform"
       x-transition:enter-start="opacity-0"
       x-transition:enter-end="opacity-100"
       x-transition:leave="transition duration-300 transform"
       x-transition:leave-start="opacity-100"
       x-transition:leave-end="opacity-0"
-      id="modal_overlay" class="absolute inset-0 bg-black bg-opacity-30 h-screen w-full flex justify-center items-start md:items-center pt-10 md:pt-0">
+      id="modal_overlay" class="pt-3 absolute inset-0 overflow-scroll bg-black bg-opacity-30 h-screen w-full items-start md:items-center pt-10 md:pt-0">
       
         <!-- modal -translate-y-full scale-150  -->
         <div id="modal" 
-    
-        class="pacity-0 transform relative w-10/10 md:w-1/3 h-1/2 md:h-3/4 bg-white rounded shadow-lg">
+        class="m-auto transform relative w-10/10 md:w-1/3 bg-white rounded shadow-lg">
         
             <!-- button close 
               onclick="openModal(false)"-->
