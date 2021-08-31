@@ -48,10 +48,10 @@
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                         Nome Exibição
                       </label>
-                      <input wire:model="roleModel.name" class="appearance-none block w-full bg-gray-200 text-gray-700 border
+                      <input wire:model="roleModel.display_name" class="appearance-none block w-full bg-gray-200 text-gray-700 border
                        border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="roleModel_name" type="text" placeholder="Digite para exibição">
-                        @error('roleModel_name') <span class="error">{{ $message }}</span> @enderror
+                        id="roleModel_display_name" type="text" placeholder="Digite para exibição">
+                        @error('roleModel.display_name') <span class="error">{{ $message }}</span> @enderror
                       <p class="text-gray-600 text-xs italic"></p>
                     </div>
                   </div>
@@ -61,8 +61,8 @@
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                         Papel
                       </label>
-                      <input wire:model="roleModel.display_name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="Aplicado para os usuários">
-                      @error('roleModel.display_name') <span class="error">{{ $message }}</span> @enderror
+                      <input wire:model="roleModel.name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="Aplicado para os usuários">
+                      @error('roleModel.name') <span class="error">{{ $message }}</span> @enderror
                       <p class="text-gray-600 text-xs italic"></p>
                     </div>
                   </div>                      
