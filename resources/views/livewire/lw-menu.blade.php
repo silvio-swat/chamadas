@@ -39,7 +39,7 @@
         </ul>
         <div class="w-full pt-4">
           @foreach($menuPages as $menuPage)        
-            <div x-show="openTab === {{$menuPage->id}}">
+            <div x-show="openTab === {{$menuPage->id}}" x-cloak>
 
               <div class="py-2">
                 <button
