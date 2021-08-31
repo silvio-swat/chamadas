@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMenusTable extends Migration
+class CreateParamItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('param_items', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('order');
-            $table->foreignId('menu_page_id')->constrained();
-            $table->string('icon')->nullable();
+            $table->string('conteudo');
+            $table->string('descricao');
+            $table->foreignId('param_id')->constrained();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +30,6 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menus');
+        Schema::dropIfExists('param_items');
     }
 }

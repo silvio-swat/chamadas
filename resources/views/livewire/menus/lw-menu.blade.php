@@ -86,18 +86,18 @@
         </div>
       </div>
       
-      @include('livewire.lw-menu-list-awesome-icons')
+      @include('livewire.menus.list-awesome-icons')
       {{-- Modal de Pages --}}
-      @include('livewire.lw-menu-form-page-modal')
-      @include('livewire.lw-menu-list-page-modal')
+      @include('livewire.menus.form-page-modal')
+      @include('livewire.menus.list-page-modal')
 
       {{-- Modal de Menus --}}
-      @include('livewire.lw-menu-form-menu-modal')
-      @include('livewire.lw-menu-list-menu-modal')    
+      @include('livewire.menus.form-menu-modal')
+      @include('livewire.menus.list-menu-modal')    
       
       {{-- Modal de SubMenus --}}
-      @include('livewire.lw-menu-form-submenu-modal')
-      @include('livewire.lw-menu-list-submenu-modal')
+      @include('livewire.menus.form-submenu-modal')
+      @include('livewire.menus.list-submenu-modal')
 
     </div>
   </div>    

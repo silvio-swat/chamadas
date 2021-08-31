@@ -56,7 +56,7 @@ class LwMenu extends Component
 
     public function render()
     {
-        return view('livewire.lw-menu')->layout('layouts.app');
+        return view('livewire.menus.lw-menu')->layout('layouts.app');
     }
 
     public function delete($key , $type)
