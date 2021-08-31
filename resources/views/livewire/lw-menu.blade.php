@@ -27,7 +27,7 @@
     </div>      
 
 {{-- Exibe as tabs de cada página cadastrada --}}
-      <div x-data="{ openTab: {{$menuPages[0] ? $menuPages[0]->id : 1}} }" class="p-6">
+      <div x-data="{ openTab: {{isset($menuPages[0]) ? $menuPages[0]->id : 1}} }" class="p-6">
         <ul class="flex border-b">
           @foreach($menuPages as $menuPage)        
             <li @click="openTab = {{$menuPage->id}}" :class="{ '-mb-px': openTab === {{$menuPage->id}} }" class="-mb-px mr-1">
