@@ -2,20 +2,22 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Requests\MenuPageRequest;
+use App\Http\Requests\MenuRequest;
+use App\Http\Requests\SubMenuRequest;
 use Livewire\Component;
 use App\Models\Menu;
 use App\Models\MenuPage;
 use App\Models\SubMenu;
 use App\Services\Helpers\ImportDataService;
-use App\Services\Menu\MenuPageService;
-use App\Services\Menu\MenuService;
-use App\Services\Menu\SubMenuService;
 
 class LwMenu extends Component
 {
+    protected $toastSrv;
     public $header = "Papeis de Usuários";
     public $opened = null;
-    protected $rules = [];
+    protected $rules    = [];
+    protected $messages = [];
     public $formTitle;
     protected $service;
     public $iconsArray = [];
@@ -38,13 +40,11 @@ class LwMenu extends Component
     public $modalFormSMOpen = "false";
     public $modalListSMOpen = "false";
     public $menuId;    
-    
-    
 
     /**
      * Instantiate a new UserController instance.
      */
-    public function __construct()
+    public function mount()
     {
         $this->menuPageModel = new MenuPage();
         $this->menuModel     = new Menu();
@@ -56,7 +56,7 @@ class LwMenu extends Component
 
     public function render()
     {
-        return view('livewire.lw-menu')->layout('layouts.app');
+        return view('livewire.menus.lw-menu')->layout('layouts.app');
     }
 
     public function delete($key , $type)
@@ -72,9 +72,11 @@ class LwMenu extends Component
             break;
             case 'SubMenu':
                 $result = SubMenu::find($key)->delete();
+                $this->loadSubMenus();
             break;                        
         }
 
+        $this->alert('success', 'Excluído com sucesso');        
     }   
     
     public function new()
@@ -164,6 +166,7 @@ class LwMenu extends Component
 
         $this->setFormClose($type);
         $this->list($type);
+        $this->alert('success', 'Salvo com sucesso');  
     } 
     
     public function setFormClose($type)
@@ -263,18 +266,33 @@ class LwMenu extends Component
         $srv = null;
         switch($this->opened) {
             case 'Page':
-                $srv = new MenuPageService();
+                $srv = new MenuPageRequest();
+                $this->messages = $srv->messages();
+                return $srv->rules();
             break;
             case 'Menu':
-                $srv = new MenuService();
+                $srv = new MenuRequest();
+                $this->messages = $srv->messages();
+                return $srv->rules();                
             break;
             case 'SubMenu':
-                $srv = new SubMenuService();
+                $srv = new SubMenuRequest();
+                $this->messages = $srv->messages();
+                return $srv->rules();                
             break;                        
         }
+    }  
 
-        if(is_object($srv)){
-            return $srv->getFormRulesLw();
-        }
+    /**
+     * Write code on Method
+     * @param string $type
+     * @param string $msg
+     * @return response()
+     */
+    public function alert($type, $msg)
+    {
+        $this->dispatchBrowserEvent('alert', 
+                ['type' => $type,  'message' => $msg]);
     }    
+     
 }

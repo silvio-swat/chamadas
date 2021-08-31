@@ -32,7 +32,7 @@ class UserRole extends Component
 
     public function render()
     {
-        return view('livewire.user-role')->layout('layouts.app');
+        return view('livewire.user-roles.lw-user-roles')->layout('layouts.app');
     }
 
     public function delete($key)

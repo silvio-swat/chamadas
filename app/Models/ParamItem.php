@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Menu extends Model
+class ParamItem extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    use SoftDeletes;    
 
     /**
      * The attributes that are mass assignable.
@@ -17,23 +17,17 @@ class Menu extends Model
      * @var array
      */
     protected $fillable = [
-        'menu_page_id',
-        'name',
-        'order',
-        'icon'
-    ];
+        'conteudo',
+        'descricao',
+        'param_id'
+    ];    
 
     protected $dates = [
         'deleted_at'
     ];      
 
-    public function subMenus()
+    public function param()
     {
-        return $this->hasMany(related: SubMenu::class);
-    }  
-    
-    public function menuPage()
-    {
-        return $this->belongsTo(related: MenuPage::class);
+        return $this->belongsTo(related: Param::class);
     }      
 }

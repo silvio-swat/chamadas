@@ -19,7 +19,7 @@ class CreateSubMenusTable extends Migration
             $table->string('controller');
             $table->string('action')->nullable();
             $table->integer('order');
-            $table->string('menu_id')->constrained();
+            $table->foreignId('menu_id')->constrained();
             $table->string('icon')->nullable();
             $table->timestamps();
             $table->softDeletes();
