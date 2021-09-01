@@ -20,7 +20,7 @@
                                   C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
                                   C15.952,9,16,9.447,16,10z" />
         </svg>
-        <span>New</span>
+        <span>Novo</span>
       </button>
     </div>   
   
@@ -33,28 +33,29 @@
                 <thead class="bg-gray-50">
                   <tr>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      ID
+                    </th>                    
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Chave
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Itens
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      <span class="sr-only">Edit</span>
+                      <span class="sr-only">Editar</span>
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       <span class="sr-only">Excluir</span>
                     </th>              
                   </tr>
                 </thead>
+
                 <tbody class="bg-white divide-y divide-gray-200">
-      
                   @foreach($params as $param)        
                   <tr class="bg-emerald-200">
-      
                       <td class="px-6 py-4 whitespace-nowrap">
                           <span>{{ $param->id}}</span>
                       </td>
-      
                       <td class="px-6 py-4 whitespace-nowrap">
                           <span>{{ $param->chave }}</span>
                       </td>     
@@ -74,15 +75,42 @@
                           </button>
                         </div>
 
+                        <table class="min-w-full divide-y divide-gray-200">
+                          <thead class="bg-gray-50">
+                            <tr>
+                              <th scope="col" class="px-3 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Conteudo 
+                              </th>
+                              <th scope="col" class="px-3 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Descrição
+                              </th>
+                              <th scope="col" class="px-3 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <span class="sr-only">Edit</span>
+                              </th>
+                              <th scope="col" class="px-3 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <span class="sr-only">Excluir</span>
+                              </th>              
+                            </tr>
+                          </thead>
 
-                        <span>
-                          Item 1<br>
-                          Item 2<br>
-                          Item 3<br>
-                          Item 4<br>
-                          Item 5<br>
-                          Item 6<br>
-                        </span>
+                          <tbody class="bg-white divide-y divide-gray-200">
+                          @foreach($param->paramItems as $item)        
+                          <tr class="bg-emerald-200">
+                              <td class="px-3 py-2 whitespace-nowrap">
+                                  {{ $item->conteudo}}
+                              </td>
+                              <td class="px-3 py-2 whitespace-nowrap">
+                                  {{ $item->descricao }}
+                              </td>     
+                              <td class="px-3 py-2 whitespace-nowrap">
+                                <button wire:click="edit({{$item->id}}, 'paramItem')">Edit</button>
+                              </td>  
+                              <td class="px-3 py-2 whitespace-nowrap">
+                                <button wire:click="delete({{$item->id}}, 'paramItem')">X</button>
+                              </td>                                
+                          </tr>        
+                          @endforeach  
+                        </table>
                       </td>                             
                       
                       <td class="px-6 py-4 whitespace-nowrap">

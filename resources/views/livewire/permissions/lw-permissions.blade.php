@@ -3,7 +3,7 @@
       <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Usuários') }}
+            {{ __('Permissões de acesso') }}
         </h2>
   
       </div>
@@ -33,16 +33,28 @@
                 <thead class="bg-gray-50">
                   <tr>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Usuário
+                        Tipo
+                    </th>                      
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Nome de Exibição
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Email
+                        permissão
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Password
+                        Descrição
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      <span class="sr-only">Edit</span>
+                        Menu
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Controller
+                    </th>   
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Action
+                    </th>                                                                                   
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <span class="sr-only">Editar</span>
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       <span class="sr-only">Excluir</span>
@@ -51,30 +63,31 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
       
-                  @foreach($users as $user)        
-                  <tr class="bg-emerald-200">
-      
+                  @foreach($permissions as $permission)        
+                    <tr class="bg-emerald-200">
                       <td class="px-6 py-4 whitespace-nowrap">
-                          <span>{{ $user->name }}</span>
+                          <span>{{ $permission->display_name }}</span>
                       </td>
-      
                       <td class="px-6 py-4 whitespace-nowrap">
-                          <span>{{ $user->email }}</span>
+                          <span>{{ $permission->name }}</span>
                       </td>     
-  
                       <td class="px-6 py-4 whitespace-nowrap">
-                        <span>{{ $user->password }}</span>
-                    </td>                             
-                      
+                          <span>{{ $permission->menu }}</span>
+                      </td>         
                       <td class="px-6 py-4 whitespace-nowrap">
-                        <button wire:click="edit({{$user->id}})">Edit</button>
+                          <span>{{ $permission->controller }}</span>
+                      </td>          
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          <span>{{ $permission->action }}</span>
+                      </td>                                                                      
+                      <td class="px-6 py-4 whitespace-nowrap">
+                          <button wire:click="edit({{$permission->id}})"><i class="fa fa-edit fa-xl"></i></button>
                       </td>  
                       <td class="px-6 py-4 whitespace-nowrap">
-                        <button wire:click="delete({{$user->id}})">X</button>
+                          <button wire:click="delete({{$permission->id}})"><i class="fa fa-trash fa-xl"></i></button>
                       </td>                                
-                  </tr>        
+                    </tr>        
                   @endforeach    
-                  <!-- More people... -->
                 </tbody>
               </table>
             </div>
@@ -82,7 +95,7 @@
         </div>
       </div> 
       
-      {{-- @include('livewire.users.form-modal') --}}
+      @include('livewire.permissions.form-modal')
   
     </div>
   </div>    

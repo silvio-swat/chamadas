@@ -33,4 +33,9 @@ class SubMenu extends Model
     {
         return $this->belongsTo(related: Menu::class);
     }  
+
+    public function param()
+    {
+        return $this->belongsTo(related: Param::class);
+    }      
 }

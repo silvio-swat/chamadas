@@ -29,5 +29,10 @@ class MenuPage extends Model
     public function menus()
     {
         return $this->hasMany(related: Menu::class);
-    }        
+    }  
+    
+    public function permission()
+    {
+        return $this->belongsTo(related: Permission::class);
+    }      
 }
