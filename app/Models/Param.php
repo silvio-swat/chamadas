@@ -9,7 +9,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Param extends Model
 {
     use HasFactory;
-    use SoftDeletes;       
+    use SoftDeletes;  
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'chave'
+    ];     
 
     protected $dates = [
         'deleted_at'

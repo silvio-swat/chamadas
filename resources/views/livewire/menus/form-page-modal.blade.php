@@ -74,7 +74,7 @@
                       <div class="relative">
                         <select wire:model="menuPageModel.icon"  class="selectpicker block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
                           @foreach ($iconsArray['solid'] as $item)
-                            <option data-content="<i class='fa fa-{{$item}}'></i>" value="fa fa-{{$item}}"> fa-{{$item}}</option>
+                            <option data-content="<i class='fa fa-{{$item}}'></i>" value="fa fa-{{$item}}"> {{$item}}</option>
                           @endforeach
                         </select>
                         @error('menuPageModel.icon') <span class="error">{{ $message }}</span> @enderror

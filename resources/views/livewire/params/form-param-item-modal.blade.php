@@ -1,11 +1,11 @@
     <!-------------------------------   HTML do modal para testar o Alpine ---------------------------->
 
-    <div x-data="{ isOpen: {{ $modalOpen }} }">
+    <div x-data="{ isOpenPItem: {{ $modalItemOpen }} }">
 
       
       <!-- overlay transition-opacity transition-transform  -->
       <div 
-      x-show="isOpen" x-cloak
+      x-show="isOpenPItem" x-cloak
       x-transition:enter="transition duration-300 transform"
       x-transition:enter-start="opacity-0"
       x-transition:enter-end="opacity-100"
@@ -22,8 +22,8 @@
             <!-- button close 
               onclick="openModal(false)"-->
             <button 
-              @click="isOpen = false"
-              wire:click="setModalClose()"
+              @click="isOpenPItem = false"
+              wire:click="setModalClose('paramItem')"
               class="absolute -top-3 -right-3 bg-red-500 hover:bg-red-600 text-2xl w-10 h-10 rounded-full focus:outline-none text-white">
               &cross;
             </button>
@@ -36,16 +36,16 @@
             <!-- body -->
             <div class="w-full p-20">
 
-              <form class="w-full max-w-lg" wire:submit.prevent="submit({{$paramModel}})">
+              <form class="w-full max-w-lg" wire:submit.prevent="submit({{$paramItemModel}}, 'paramItem')">
                   <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full px-3">
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                        Nome Exibição
+                        Conteúdo
                       </label>
-                      <input wire:model="paramModel.display_name" class="appearance-none block w-full bg-gray-200 text-gray-700 border
+                      <input wire:model="paramItemModel.conteudo" class="appearance-none block w-full bg-gray-200 text-gray-700 border
                        border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="paramModel_display_name" type="text" placeholder="Digite para exibição">
-                        @error('paramModel.display_name') <span class="error">{{ $message }}</span> @enderror
+                        id="paramItemModel_conteudo" type="text" placeholder="Digite para exibição">
+                        @error('paramItemModel.conteudo') <span class="error">{{ $message }}</span> @enderror
                       <p class="text-gray-600 text-xs italic"></p>
                     </div>
                   </div>
@@ -53,26 +53,13 @@
                   <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full px-3">
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                        Papel
+                        Descricao
                       </label>
-                      <input wire:model="paramModel.name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="Aplicado para os usuários">
-                      @error('paramModel.name') <span class="error">{{ $message }}</span> @enderror
+                      <input wire:model="paramItemModel.descricao" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="paramItem_descricao" type="text" placeholder="Aplicado para os usuários">
+                      @error('paramItemModel.descricao') <span class="error">{{ $message }}</span> @enderror
                       <p class="text-gray-600 text-xs italic"></p>
                     </div>
                   </div>                      
-
-                  <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full px-3">
-                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                        Descrição
-                      </label>
-                      <textarea wire:model="paramModel.description" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="Aplicado para os usuários">
-                      </textarea>
-                      @error('paramModel.description') <span class="error">{{ $message }}</span> @enderror
-                      <p class="text-gray-600 text-xs italic"></p>
-                    </div>
-                  </div>  
-
                 </div>
         
             <!-- footer -->
@@ -83,8 +70,8 @@
           </form>
               <!-- onclick="openModal(false)" -->
               <button 
-                  @click="isOpen = false"
-                  wire:click="setModalClose()"
+                  @click="isOpenPItem = false"
+                  wire:click="setModalClose('paramItem')"
                   class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded text-white focus:outline-none"
               >Close</button>
             </div>
