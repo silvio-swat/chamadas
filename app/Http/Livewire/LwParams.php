@@ -28,8 +28,6 @@ class LwParams extends Component
     public function mount()
     {      
         $this->carregaDados('param');
-        $this->paramModel     = new Param();
-        $this->paramItemModel = new ParamItem();
     } 
 
     public function render()
@@ -41,10 +39,12 @@ class LwParams extends Component
      * Instantiate a new UserController instance.
      */
     public function new()
-    {      
+    {   
+        $this->paramModel     = new Param();
         $this->opened = 'param';
         $this->formTitle  = "Criar novo parametro";
         $this->setModalOpen('param');
+
     }   
     
     /**
@@ -52,6 +52,7 @@ class LwParams extends Component
      */
     public function newItem($id)
     {     
+        $this->paramItemModel = new ParamItem(); 
         $this->paramId = $id;        
         $this->opened = 'paramItem'; 
         $this->formTitle      = "Criar novo Item";
@@ -72,7 +73,7 @@ class LwParams extends Component
             break;
             case 'paramItem':
                 $this->paramItemModel = ParamItem::find($id);
-                $this->formTitle = "Edição do item  {$this->paramModel->name}
+                $this->formTitle = "Edição do item  {$this->paramItemModel->conteudo}
                 de parametro  {$this->paramItemModel->param->chave}";
                 $this->modalItemOpen = "true";
                 $this->setModalClose('param');
@@ -157,16 +158,14 @@ class LwParams extends Component
             switch($type){
                 case 'param':
                     $this->paramModel->create($model);
-                break;
+                    break;
                 case 'paramItem':
                     $this->paramItemModel->create($model);
-                    $this->setModalOpen('param');
-                    $this->carregaDados('param'); 
                 break;                        
-            }            
+            }   
         }
 
-        $this->carregaDados($type);        
+        $this->carregaDados('param');      
         $this->setModalClose($type);
         $this->alert('success', 'Salvo com sucesso');  
     }     

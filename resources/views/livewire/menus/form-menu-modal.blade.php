@@ -68,7 +68,7 @@
                       </div>
                     </div>       
                     
-                    <div class="w-full px-3>
+                    <div class="w-full px-3">
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
                         Icone
                       </label>

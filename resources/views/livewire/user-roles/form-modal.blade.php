@@ -11,14 +11,12 @@
       x-transition:leave="transition duration-300 transform"
       x-transition:leave-start="opacity-100"
       x-transition:leave-end="opacity-0"
-      id="modal_overlay" class="pt-3 absolute inset-0 overflow-scroll bg-black bg-opacity-30 h-screen w-full items-start md:items-center pt-10 md:pt-0">
+      id="modal_overlay" class="pt-3 absolute inset-0 overflow-scroll bg-black bg-opacity-30 h-screen w-full items-start md:items-center md:pt-0">
       
         <!-- modal -translate-y-full scale-150  -->
         <div id="modal" 
         class="m-auto transform relative w-10/10 md:w-1/3 bg-white rounded shadow-lg">
         
-            <!-- button close 
-              onclick="openModal(false)"-->
             <button 
               @click="isOpen = false"
               wire:click="setModalClose()"

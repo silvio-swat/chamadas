@@ -20,7 +20,7 @@
                                 C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
                                 C15.952,9,16,9.447,16,10z" />
       </svg>
-      <span>New</span>
+      <span>Novo</span>
     </button>
   </div>   
 
@@ -67,16 +67,13 @@
                   </td>                             
                     
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <button wire:click="edit({{$role->id}})">Edit</button>
-                      {{-- <a href="#" wire:click="edit({{$role->id}})" class="text-indigo-600 hover:text-indigo-900">Edit</a> --}}
+                      <button wire:click="edit({{$role->id}})"><i class="fa fa-edit fa-xl"></i></button>
                     </td>  
                     <td class="px-6 py-4 whitespace-nowrap">
-                      <button wire:click="delete({{$role->id}})">X</button>
-                      {{-- <a href="#" wire:click="delete({{$role->id}})" class="text-red-600 hover:text-indigo-900">Delete</a> --}}
+                      <button wire:click="delete({{$role->id}})"><i class="fa fa-trash fa-xl"></i></button>
                     </td>                                
                 </tr>        
                 @endforeach    
-                <!-- More people... -->
               </tbody>
             </table>
           </div>
