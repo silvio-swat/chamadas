@@ -35,5 +35,10 @@ class Menu extends Model
     public function menuPage()
     {
         return $this->belongsTo(related: MenuPage::class);
+    }  
+    
+    public function param()
+    {
+        return $this->belongsTo(related: Param::class);
     }      
 }
