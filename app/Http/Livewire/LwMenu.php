@@ -284,7 +284,7 @@ class LwMenu extends Component
     }  
 
     /**
-     * Write code on Method
+     * Mensagem de toast
      * @param string $type
      * @param string $msg
      * @return response()
