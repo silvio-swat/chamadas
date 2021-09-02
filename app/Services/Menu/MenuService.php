@@ -11,7 +11,7 @@ class MenuService
         $this->srvSubMenu = new SubMenuService();
     }
 
-    public function getSelectMenusArray($selectArray, $menus){
+    public function getSelectMenuArray($selectArray = [], $menus){
 
         if(count($menus) > 0){
             foreach($menus as $menu){
@@ -19,7 +19,7 @@ class MenuService
                     'value'  => $menu->menuPage->name  . "/" . $menu->name,
                     'descri' => $menu->menuPage->name  . "/" . $menu->name,
                ];
-               $selectArray = $this->srvSubMenu->getSelectMenusArray($selectArray, $menu->subMenus);
+               $selectArray = $this->srvSubMenu->getSelectSubArray($selectArray, $menu->subMenus);
             }
         } 
 

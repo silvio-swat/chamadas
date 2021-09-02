@@ -5,15 +5,13 @@ namespace App\Http\Livewire;
 use App\Http\Requests\MenuPageRequest;
 use App\Http\Requests\MenuRequest;
 use App\Http\Requests\SubMenuRequest;
-use Livewire\Component;
 use App\Models\Menu;
 use App\Models\MenuPage;
 use App\Models\SubMenu;
 use App\Services\Helpers\ImportDataService;
 
-class LwMenu extends Component
+class LwMenu extends CrudComponent
 {
-    protected $toastSrv;
     public $header = "Papeis de Usuários";
     public $opened = null;
     protected $rules    = [];
@@ -282,17 +280,5 @@ class LwMenu extends Component
             break;                        
         }
     }  
-
-    /**
-     * Mensagem de toast
-     * @param string $type
-     * @param string $msg
-     * @return response()
-     */
-    public function alert($type, $msg)
-    {
-        $this->dispatchBrowserEvent('alert', 
-                ['type' => $type,  'message' => $msg]);
-    }    
      
 }

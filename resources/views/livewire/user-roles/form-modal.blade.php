@@ -15,7 +15,7 @@
       
         <!-- modal -translate-y-full scale-150  -->
         <div id="modal" 
-        class="m-auto transform relative w-10/10 md:w-1/3 bg-white rounded shadow-lg">
+        class="m-auto mt-3 transform relative w-10/10 md:w-1/3 bg-white rounded shadow-lg">
         
             <button 
               @click="isOpen = false"
