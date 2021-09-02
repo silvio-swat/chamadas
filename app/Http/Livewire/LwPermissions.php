@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use App\Models\Permission;
 use App\Services\Helpers\ParametrosService;
+use App\Services\Menu\MenuPageService;
+use App\Services\Menu\MenuService;
 use Livewire\Component;
 
 class LwPermissions extends Component
@@ -97,6 +99,9 @@ class LwPermissions extends Component
     {
         $param = new ParametrosService();
         $this->selectTipos = $param->getSelectArray('permissionsType');
+        $menuPageSrv= new MenuPageService();
+        $this->selectMenus = $menuPageSrv->getSelectMenusArray();
+
     }        
     
 
