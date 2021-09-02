@@ -1,15 +1,39 @@
 <?php
 namespace App\Services\Menu;
 
+use App\Models\MenuPage;
+
+
 class MenuPageService
 {
-    private $formRulesLw = [
-        'menuPageModel.name'         => 'required|string|min:3',
-        'menuPageModel.order'        => 'required|integer|min:1',
-        'menuPageModel.icon'         => 'required',
-    ];
+    private $srvMenu;
 
-    public function getFormRulesLw(){
-        return $this->formRulesLw;
+    public function __construct() {
+        $this->srvMenu    = new MenuService();
     }
+
+    public function getSelectMenusArray(){
+        $selectArray = [];
+        $pages = MenuPage::all();
+
+        if(count($pages) > 0){
+            foreach($pages as $page){
+                $selectArray[] = [
+                     'value'  => $page->name,
+                     'descri' => $page->name
+                ];
+                $selectArray = $this->srvMenu->getSelectMenusArray($selectArray, $page->menus);
+            }
+        } else {
+            $selectArray = [
+                'value'  => null,
+                'descri' => 'nenhum item encontrado'
+           ];            
+        }
+        sort($selectArray);
+
+        return $selectArray;
+    }  
+
+
 }
