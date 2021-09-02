@@ -43,9 +43,9 @@
                     <select wire:model="permissionModel.type" class="selectpicker block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none 
                     focus:bg-white focus:border-gray-500" id="permissionModel_type">
                       <option value="">Escolha um tipo</option>
-                      {{-- @foreach ($iconsArray['solid'] as $item)
-                        <option data-content="<i class='fa fa-{{$item}}'></i>" value="fa fa-{{$item}}">{{$item}}</option>
-                      @endforeach --}}
+                      @foreach ($selectTipos as $item)
+                        <option value="{{$item['value']}}">{{$item['descri']}}</option>
+                      @endforeach
                     </select>
                     @error('permissionModel.type') <span class="error">{{ $message }}</span> @enderror
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -66,9 +66,9 @@
                       <select wire:model="permissionModel.menu" class="selectpicker block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none 
                       focus:bg-white focus:border-gray-500" id="permissionModel_menu">
                         <option value="">Escolha o Menu (Crie primeiro)</option>
-                        {{-- @foreach ($iconsArray['solid'] as $item)
-                          <option data-content="<i class='fa fa-{{$item}}'></i>" value="fa fa-{{$item}}">{{$item}}</option>
-                        @endforeach --}}
+                        @foreach ($selectMenus as $item)
+                          <option value="{{$item['value']}}">{{$item['descri']}}</option>
+                        @endforeach
                       </select>
                       @error('permissionModel.menu') <span class="error">{{ $message }}</span> @enderror
                       <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">

@@ -1,14 +1,28 @@
 <?php
 namespace App\Services\Menu;
 
+use App\Models\Menu;
+
 class MenuService
 {
-    public function getFormRulesLw(){
-        return [
-            'menuModel.name'         => 'required|string|min:3',
-            'menuModel.order'        => 'required|integer|min:1',
-            'menuModel.menu_page_id' => 'required',
-            'menuModel.icon'         => 'required',
-        ];
+    private $srvSubMenu;    
+
+    public function __construct() {
+        $this->srvSubMenu = new SubMenuService();
     }
+
+    public function getSelectMenusArray($selectArray, $menus){
+
+        if(count($menus) > 0){
+            foreach($menus as $menu){
+                $selectArray[] = [
+                    'value'  => $menu->menuPage->name  . "/" . $menu->name,
+                    'descri' => $menu->menuPage->name  . "/" . $menu->name,
+               ];
+               $selectArray = $this->srvSubMenu->getSelectMenusArray($selectArray, $menu->subMenus);
+            }
+        } 
+
+        return $selectArray;
+    }     
 }

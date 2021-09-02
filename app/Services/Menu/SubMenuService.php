@@ -3,14 +3,17 @@ namespace App\Services\Menu;
 
 class SubMenuService
 {
-    public function getFormRulesLw(){
-        return [
-            'subMenuModel.name'         => 'required|string|min:3',
-            'subMenuModel.controller'   => 'required|string|min:3',
-            'subMenuModel.action'       => '',            
-            'subMenuModel.menu_id'      => 'required',
-            'subMenuModel.order'        => 'required|integer|min:1',
-            'subMenuModel.icon'         => 'required',
-        ];
-    }
+    public function getSelectMenusArray($selectArray, $subMenus){
+
+        if(count($subMenus) > 0){
+            foreach($subMenus as $subMenu){
+                $selectArray[] = [
+                    'value'  => $subMenu->menu->menuPage->name  . "/" . $subMenu->menu->name  . "/" . $subMenu->name,
+                    'descri' => $subMenu->menu->menuPage->name  . "/" . $subMenu->menu->name  . "/" . $subMenu->name,
+               ];
+            }
+        } 
+
+        return $selectArray;
+    } 
 }
