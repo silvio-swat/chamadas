@@ -9,7 +9,7 @@
       </div>
     </div>
   
-  <div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
+  <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
     <div class="py-3 ">
       <button
         wire:click="new()"
@@ -66,11 +66,17 @@
                   @foreach($permissions as $permission)        
                     <tr class="bg-emerald-200">
                       <td class="px-6 py-4 whitespace-nowrap">
+                        <span>{{ $permission->type }}</span>
+                    </td>                      
+                      <td class="px-6 py-4 whitespace-nowrap">
                           <span>{{ $permission->display_name }}</span>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap">
                           <span>{{ $permission->name }}</span>
                       </td>     
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        <span>{{ $permission->descri }}</span>
+                    </td>                        
                       <td class="px-6 py-4 whitespace-nowrap">
                           <span>{{ $permission->menu }}</span>
                       </td>         

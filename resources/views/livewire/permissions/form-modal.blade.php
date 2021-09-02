@@ -15,7 +15,7 @@
       
         <!-- modal -translate-y-full scale-150  -->
         <div id="modal" 
-        class="m-auto transform relative w-10/10 md:w-1/3 bg-white rounded shadow-lg">
+        class="m-auto mt-3 transform relative w-10/10 md:w-1/3 bg-white rounded shadow-lg">
         
             <button 
               @click="isOpen = false"
@@ -56,11 +56,10 @@
                 </div>
                 </div>
 
-
-                <div class="flex flex-wrap -mx-3 mb-6">                
+                <div class="flex flex-wrap -mx-3 mb-6" x-show={{$permissionModel->type != "menu" ? 'false' : 'true'}}>                
                   <div class="w-full px-3">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                      Menu  (* Tipos Menu)
+                      Menu(*)
                     </label>
                     <div class="relative">
                       <select wire:model="permissionModel.menu" class="selectpicker block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none 
@@ -70,7 +69,7 @@
                           <option value="{{$item['value']}}">{{$item['descri']}}</option>
                         @endforeach
                       </select>
-                      @error('permissionModel.menu') <span class="error">{{ $message }}</span> @enderror
+                      @error('permissionModel.name') <span class="error">{{ $message }}</span> @enderror
                       <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -79,20 +78,20 @@
                   </div>
                 </div>
 
-                  <div class="flex flex-wrap -mx-3 mb-6">                
+                  <div class="flex flex-wrap -mx-3 mb-6" x-show={{$permissionModel->type == "menu" ? 'false' : 'true'}}>                
                     <div class="w-full px-3">
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                        Controller (* Outros Tipos)
+                        Controller(*)
                       </label>
                       <div class="relative">
                         <select wire:model="permissionModel.controller" class="selectpicker block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none 
                         focus:bg-white focus:border-gray-500" id="permissionModel_controller">
                           <option value="">Escolha o Controller</option>
-                          {{-- @foreach ($iconsArray['solid'] as $item)
-                            <option data-content="<i class='fa fa-{{$item}}'></i>" value="fa fa-{{$item}}">{{$item}}</option>
-                          @endforeach --}}
+                          @foreach ($selectControllers as $item)
+                            <option value="{{$item['value']}}">{{$item['descri']}}</option>
+                          @endforeach
                         </select>
-                        @error('permissionModel.controller') <span class="error">{{ $message }}</span> @enderror
+                        @error('permissionModel.name') <span class="error">{{ $message }}</span> @enderror
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                           <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -101,7 +100,7 @@
                     </div>
                   </div>                  
 
-              <div class="flex flex-wrap -mx-3 mb-6">
+              <div class="flex flex-wrap -mx-3 mb-6" x-show={{$permissionModel->type == "menu" ? 'false' : 'true'}}>
                 <div class="w-full px-3">
                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
                     Método
