@@ -3,7 +3,7 @@ namespace App\Services\Menu;
 
 class SubMenuService
 {
-    public function getSelectMenusArray($selectArray, $subMenus){
+    public function getSelectSubArray($selectArray = [], $subMenus){
 
         if(count($subMenus) > 0){
             foreach($subMenus as $subMenu){

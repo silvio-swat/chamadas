@@ -6,19 +6,18 @@ use App\Http\Requests\ParamItemRequest;
 use App\Http\Requests\ParamRequest;
 use App\Models\Param;
 use App\Models\ParamItem;
-use Livewire\Component;
 
-class LwParams extends Component
+class LwParams extends CrudComponent
 {
-    public $rules    = [];
-    public $messages = [];
-    public $params = [];
+    public $rules      = [];
+    public $messages   = [];
+    public $params     = [];
     public $paramItems = [];
     public $paramModel;
     public $paramItemModel;
-    public $modalOpen = "false";
+    public $modalOpen     = "false";
     public $modalItemOpen = "false";
-    public $formTitle = "Lista de parâmetros";
+    public $formTitle     = "Lista de parâmetros";
     public $paramId;
     public $opened;
 
@@ -41,8 +40,8 @@ class LwParams extends Component
     public function new()
     {   
         $this->paramModel     = new Param();
-        $this->opened = 'param';
-        $this->formTitle  = "Criar novo parametro";
+        $this->opened         = 'param';
+        $this->formTitle      = "Criar novo parametro";
         $this->setModalOpen('param');
 
     }   
@@ -111,19 +110,6 @@ class LwParams extends Component
         }
     } 
     
-    /**
-     * Mensagem de toast
-     * @param string $type
-     * @param string $msg
-     * @return response()
-     */
-    public function alert($type, $msg)
-    {
-        $this->dispatchBrowserEvent('alert', 
-                ['type' => $type,  'message' => $msg]);
-    } 
-    
-    
     // Seta regras de formulario conforme lista e form new ou edit clicados por conseguinte
     protected function rules()
     {
@@ -176,10 +162,9 @@ class LwParams extends Component
         switch($type) {
             case 'param':
                 $this->params         = Param::all();
-                break;
+            break;
             case 'paramItem':
                 $this->paramItems     = ParamItem::all();
-                    
             break;                     
         }
     }     
