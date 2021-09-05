@@ -22,7 +22,8 @@ class SubMenu extends Model
         'controller',
         'action',
         'order',
-        'icon'
+        'icon',
+        'permission_id'        
     ];
 
     protected $dates = [

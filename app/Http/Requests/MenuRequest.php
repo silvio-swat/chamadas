@@ -24,10 +24,11 @@ class MenuRequest extends FormRequest
     public function rules()
     {
         return [
-            'menuModel.name'         => 'required|string|min:3',
-            'menuModel.order'        => 'required|integer|min:1',
-            'menuModel.menu_page_id' => 'required',
-            'menuModel.icon'         => 'required',
+            'menuModel.name'              => 'required|string|min:3',
+            'menuModel.order'             => 'required|integer|min:1',
+            'menuModel.menu_page_id'      => 'required',
+            'menuModel.icon'              => 'required',
+            'menuModel.permission_id'     => '',
         ];
     }
 
