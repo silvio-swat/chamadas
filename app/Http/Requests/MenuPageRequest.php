@@ -24,9 +24,10 @@ class MenuPageRequest extends FormRequest
     public function rules()
     {
         return [
-            'menuPageModel.name'         => 'required|string|min:3',
-            'menuPageModel.order'        => 'required|integer|min:1',
-            'menuPageModel.icon'         => 'required',
+            'menuPageModel.name'          => 'required|string|min:3',
+            'menuPageModel.order'         => 'required|integer|min:1',
+            'menuPageModel.icon'          => 'required',
+            'menuPageModel.permission_id' => '',
         ];
     }
 
@@ -38,9 +39,9 @@ class MenuPageRequest extends FormRequest
     public function messages()
     {
         return [
-            'menuPageModel.name.required' => 'Digite o nome da página',
+            'menuPageModel.name.required'  => 'Digite o nome da página',
             'menuPageModel.order.required' => 'Insira um número para ordenar',
-            'menuPageModel.icon.required' => 'Selecione um ícone!',
+            'menuPageModel.icon.required'  => 'Selecione um ícone!',
         ];
     }    
 }

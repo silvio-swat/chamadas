@@ -9,6 +9,7 @@ use App\Models\Menu;
 use App\Models\MenuPage;
 use App\Models\SubMenu;
 use App\Services\Helpers\ImportDataService;
+use App\Services\PermissionService;
 
 class LwMenu extends CrudComponent
 {
@@ -20,6 +21,7 @@ class LwMenu extends CrudComponent
     protected $service;
     public $iconsArray = [];
     public $modalListIconsOpen = "false";
+    public $selPermissions = [];
 
     // Variaveis de Page
     public MenuPage $menuPageModel;
@@ -44,12 +46,13 @@ class LwMenu extends CrudComponent
      */
     public function mount()
     {
+        $this->loadPemissionsSelect();          
         $this->menuPageModel = new MenuPage();
         $this->menuModel     = new Menu();
         $this->subMenuModel  = new SubMenu();
         $this->loadMenuPages();
         $inpDataSrv = new ImportDataService();
-        $this->iconsArray = $inpDataSrv->awesomeIconsArray();         
+        $this->iconsArray = $inpDataSrv->awesomeIconsArray(); 
     }   
 
     public function render()
@@ -228,8 +231,8 @@ class LwMenu extends CrudComponent
                 return $subMenu->order;
             });           
         } 
-    }      
-
+    }  
+    
     public function list($type, $id = null)
     {
         $this->opened = $type;
@@ -280,5 +283,11 @@ class LwMenu extends CrudComponent
             break;                        
         }
     }  
+
+    public function loadPemissionsSelect()
+    {
+        $permissionSrv          = new PermissionService();
+        $this->selPermissions   = $permissionSrv->getPermissionSelectArray();
+    }         
      
 }

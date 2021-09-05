@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Models\Permission;
 use App\Services\Helpers\ParametrosService;
 
 class PermissionService
@@ -19,5 +20,26 @@ class PermissionService
 
         return $displayType  . ": " . $displayMenu . $displayCtr;
     }
+
+    public function getPermissionSelectArray(){
+        $selectArray = [];
+        $permissions = Permission::all();
+        if(count($permissions) > 0){
+            $selectArray[] = ['value'  => "",
+                              'descri' => 'Selecione uma permissão'];
+            foreach($permissions as $item){
+                $selectArray[] = [
+                     'value'  => $item->id,
+                     'descri' => $item->display_name
+                ];
+            }
+        } else {
+            $selectArray = [
+                'value'  => "",
+                'descri' => 'nenhum item encontrado'
+           ];            
+        }
+        return $selectArray;
+    }      
 
 }

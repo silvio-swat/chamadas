@@ -1,6 +1,6 @@
     <!-------------------------------   HTML do modal para testar o Alpine ---------------------------->
 
-    <div x-data="{ isOpenPItem: {{ $modalItemOpen }} }">
+    <div x-data="{ isOpenPItem: {{ $modalItemOpen }} }" >
 
       
       <!-- overlay transition-opacity transition-transform  -->
@@ -12,12 +12,12 @@
       x-transition:leave="transition duration-300 transform"
       x-transition:leave-start="opacity-100"
       x-transition:leave-end="opacity-0"
-      id="modal_overlay" class="absolute inset-0 bg-black bg-opacity-30  w-full flex justify-center items-start md:items-center pt-10 md:pt-0">
+      id="modal_overlay" class="absolute top-0 right-0  'overflow-visible y-full w-full inset-0 bg-black bg-opacity-30 h-screen flex justify-center items-start md:items-center pt-10 md:pt-0">
       
         <!-- modal -translate-y-full scale-150  -->
         <div id="modal" 
     
-        class="pacity-0 transform relative w-10/10 md:w-1/3 bg-white rounded shadow-lg">
+        class="m-auto transform relative w-10/10 md:w-1/3 bg-white rounded shadow-lg">
         
             <!-- button close 
               onclick="openModal(false)"-->

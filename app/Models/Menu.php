@@ -20,7 +20,8 @@ class Menu extends Model
         'menu_page_id',
         'name',
         'order',
-        'icon'
+        'icon',
+        'permission_id'        
     ];
 
     protected $dates = [
