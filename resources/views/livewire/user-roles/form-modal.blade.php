@@ -20,59 +20,59 @@
             <button 
               @click="isOpen = false"
               wire:click="setModalClose()"
-              class="absolute -top-3 -right-3 bg-red-500 hover:bg-red-600 text-2xl w-10 h-10 rounded-full focus:outline-none text-white">
+              class="modal--close--button">
               &cross;
             </button>
         
             <!-- header -->
-            <div class="px-4 py-3 border-b border-gray-200">
-            <h2 class="text-xl font-semibold text-gray-600">{{$formTitle}}</h2>
+            <div class="modal--header">
+            <h2 class="modal--h2">{{$formTitle}}</h2>
             </div>
         
             <!-- body -->
-            <div class="w-full p-20">
+            <div class="modal--body">
 
-              <form class="w-full max-w-lg" wire:submit.prevent="submit({{$roleModel}})">
-                  <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full px-3">
-                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+              <form class="modal--form-class" wire:submit.prevent="submit({{$roleModel}})">
+                  <div class="modal--form-input-div-1">
+                    <div class="modal--form-input-div-2">
+                      <label class="modal--form-label" for="grid-password">
                         Nome Exibição
                       </label>
                       <input wire:model="roleModel.display_name" class="appearance-none block w-full bg-gray-200 text-gray-700 border
                        border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         id="roleModel_display_name" type="text" placeholder="Digite para exibição">
                         @error('roleModel.display_name') <span class="error">{{ $message }}</span> @enderror
-                      <p class="text-gray-600 text-xs italic"></p>
+                      <p class="modal--form-p-error"></p>
                     </div>
                   </div>
 
-                  <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full px-3">
-                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                  <div class="modal--form-input-div-1">
+                    <div class="modal--form-input-div-2">
+                      <label class="modal--form-label" for="grid-password">
                         Papel
                       </label>
-                      <input wire:model="roleModel.name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="Aplicado para os usuários">
+                      <input wire:model="roleModel.name" class="modal--form-input" id="grid-password" type="text" placeholder="Aplicado para os usuários">
                       @error('roleModel.name') <span class="error">{{ $message }}</span> @enderror
-                      <p class="text-gray-600 text-xs italic"></p>
+                      <p class="modal--form-p-error"></p>
                     </div>
                   </div>                      
 
-                  <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full px-3">
-                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                  <div class="modal--form-input-div-1">
+                    <div class="modal--form-input-div-2">
+                      <label class="modal--form-label" for="grid-password">
                         Descrição
                       </label>
-                      <textarea wire:model="roleModel.description" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="Aplicado para os usuários">
+                      <textarea wire:model="roleModel.description" class="modal--form-input" id="grid-password" type="text" placeholder="Aplicado para os usuários">
                       </textarea>
                       @error('roleModel.description') <span class="error">{{ $message }}</span> @enderror
-                      <p class="text-gray-600 text-xs italic"></p>
+                      <p class="modal--form-p-error"></p>
                     </div>
                   </div>  
 
                 </div>
         
             <!-- footer -->
-            <div class="absolute bottom-0 left-0 px-4 py-3 border-t border-gray-200 w-full flex justify-end items-center gap-3">
+            <div class="modal--form-footer">
             <button class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded 
             text-white focus:outline-none" type="submit">Save</button>
 
@@ -81,7 +81,7 @@
               <button 
                   @click="isOpen = false"
                   wire:click="setModalClose()"
-                  class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded text-white focus:outline-none"
+                  class="delete--button"
               >Close</button>
             </div>
         </div>
