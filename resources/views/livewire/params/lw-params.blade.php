@@ -9,7 +9,7 @@
       </div>
     </div>
   
-  <div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
+  <div class="modal--body-div">
     <div class="py-3 ">
       <button
         wire:click="new()"
@@ -27,40 +27,40 @@
       <div class="flex flex-col my-3">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <div class="modal--table-div">
   
-              <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+              <table class="modal--table">
+                <thead class="modal--table-thead">
                   <tr>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="modal--table-th">
                       ID
                     </th>                    
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="modal--table-th">
                       Chave
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="modal--table-th">
                       Itens
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="modal--table-th">
                       <span class="sr-only">Editar</span>
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="modal--table-th">
                       <span class="sr-only">Excluir</span>
                     </th>              
                   </tr>
                 </thead>
 
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="modal--table-tbody">
                   @foreach($params as $param)        
-                  <tr class="bg-emerald-200">
-                      <td class="px-6 py-4 whitespace-nowrap">
+                  <tr class="modal--table-tr">
+                      <td class="modal--table-td">
                           <span>{{ $param->id}}</span>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap">
+                      <td class="modal--table-td">
                           <span>{{ $param->chave }}</span>
                       </td>     
   
-                      <td class="px-6 py-4 whitespace-nowrap">
+                      <td class="modal--table-td">
                         <div class="py-3 ">
                           <button
                             wire:click="newItem({{ $param->id}}, 'paramItem')"
@@ -75,8 +75,8 @@
                           </button>
                         </div>
 
-                        <table class="min-w-full divide-y divide-gray-200">
-                          <thead class="bg-gray-50">
+                        <table class="modal--table">
+                          <thead class="modal--table-thead">
                             <tr>
                               <th scope="col" class="px-3 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Conteudo 
@@ -93,9 +93,9 @@
                             </tr>
                           </thead>
 
-                          <tbody class="bg-white divide-y divide-gray-200">
+                          <tbody class="modal--table-tbody">
                           @foreach($param->paramItems as $item)        
-                          <tr class="bg-emerald-200">
+                          <tr class="modal--table-tr">
                               <td class="px-3 py-2 whitespace-nowrap">
                                   {{ $item->conteudo}}
                               </td>
@@ -103,21 +103,21 @@
                                   {{ $item->descricao }}
                               </td>     
                               <td class="px-3 py-2 whitespace-nowrap">
-                                <button wire:click="edit({{$item->id}}, 'paramItem')">Edit</button>
+                                <button wire:click="edit({{$item->id}}, 'paramItem')"><i class="fa fa-edit fa-lg"></i></button>
                               </td>  
                               <td class="px-3 py-2 whitespace-nowrap">
-                                <button wire:click="delete({{$item->id}}, 'paramItem')">X</button>
+                                <button wire:click="delete({{$item->id}}, 'paramItem')"><i class="fa fa-trash fa-lg"></i></button>
                               </td>                                
                           </tr>        
                           @endforeach  
                         </table>
                       </td>                             
                       
-                      <td class="px-6 py-4 whitespace-nowrap">
-                        <button wire:click="edit({{$param->id}}, 'param')">Edit</button>
+                      <td class="modal--table-td">
+                        <button wire:click="edit({{$param->id}}, 'param')"><i class="fa fa-edit fa-lg"></i></button>
                       </td>  
-                      <td class="px-6 py-4 whitespace-nowrap">
-                        <button wire:click="delete({{$param->id}}, 'param')">X</button>
+                      <td class="modal--table-td">
+                        <button wire:click="delete({{$param->id}}, 'param')"><i class="fa fa-trash fa-lg"></i></button>
                       </td>                                
                   </tr>        
                   @endforeach    

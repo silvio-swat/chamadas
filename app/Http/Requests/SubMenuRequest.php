@@ -30,7 +30,7 @@ class SubMenuRequest extends FormRequest
             'subMenuModel.menu_id'        => 'required',
             'subMenuModel.order'          => 'required|integer|min:1',
             'subMenuModel.icon'           => 'required',
-            'subMenuModel.permission_id' => '',            
+            'subMenuModel.permission_id'  => '',            
 
         ];
     }

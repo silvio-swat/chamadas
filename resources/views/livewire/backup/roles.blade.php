@@ -7,42 +7,42 @@
 <div class="flex flex-col my-5">
   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
+      <div class="modal--table-div">
+        <table class="modal--table">
+          <thead class="modal--table-thead">
             <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" class="modal--table-th">
                 Nome de Exibição
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" class="modal--table-th">
                 Papel
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" class="modal--table-th">
                 <span class="sr-only">Edit</span>
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" class="modal--table-th">
                 <span class="sr-only">Excluir</span>
               </th>              
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody class="modal--table-tbody">
 
             @foreach($roles as $role)        
-            <tr class="bg-emerald-200">
+            <tr class="modal--table-tr">
 
-                <td class="px-6 py-4 whitespace-nowrap">
+                <td class="modal--table-td">
                     <span>{{ $role->display_name }}</span>
                 </td>
 
-                <td class="px-6 py-4 whitespace-nowrap">
+                <td class="modal--table-td">
                     <span>{{ $role->name }}</span>
                 </td>     
                 
-                <td class="px-6 py-4 whitespace-nowrap">
+                <td class="modal--table-td">
                   <button wire:click="edit({{$role->id}})">Edit</button>
                   {{-- <a href="#" wire:click="edit({{$role->id}})" class="text-indigo-600 hover:text-indigo-900">Edit</a> --}}
                 </td>  
-                <td class="px-6 py-4 whitespace-nowrap">
+                <td class="modal--table-td">
                   <button wire:click="delete({{$role->id}})">X</button>
                   {{-- <a href="#" wire:click="delete({{$role->id}})" class="text-red-600 hover:text-indigo-900">Delete</a> --}}
                 </td>                                
@@ -63,7 +63,7 @@
 <!-- onclick="openModal(true)" -->
 <div x-data="{ isOpen: false }">
   <div class="p-3">
-      <button  class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded text-white focus:outline-none"
+      <button  class="modal--form-save-button"
         @click="isOpen = true"
       >
         Open Modal
@@ -90,13 +90,13 @@
           onclick="openModal(false)"-->
         <button 
           @click="isOpen = false"
-          class="absolute -top-3 -right-3 bg-red-500 hover:bg-red-600 text-2xl w-10 h-10 rounded-full focus:outline-none text-white">
+          class="modal--close--button">
           &cross;
         </button>
     
         <!-- header -->
-        <div class="px-4 py-3 border-b border-gray-200">
-        <h2 class="text-xl font-semibold text-gray-600">Title</h2>
+        <div class="modal--header">
+        <h2 class="modal--h2">Title</h2>
         </div>
     
         <!-- body -->
@@ -105,12 +105,12 @@
         </div>
     
         <!-- footer -->
-        <div class="absolute bottom-0 left-0 px-4 py-3 border-t border-gray-200 w-full flex justify-end items-center gap-3">
-        <button class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded text-white focus:outline-none">Save</button>
+        <div class="modal--form-footer">
+        <button class="modal--form-save-button">Save</button>
         <!-- onclick="openModal(false)" -->
         <button 
             @click="isOpen = false"
-            class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded text-white focus:outline-none"
+            class="delete--button"
         >Close</button>
         </div>
     </div>
