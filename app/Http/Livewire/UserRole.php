@@ -16,10 +16,13 @@ class UserRole extends Component
         'roleModel.description'  => 'string|max:65000',
     ];
 
-    public $search = null;
-    public $modalOpen = "false";
-    public $testeinput = "Teste de preenchimento de campo";
+    public $search      = null;
+    public $modalOpen   = "false";
+    public $modalDelete = "false";
+    public $testeinput  = "Teste de preenchimento de campo";
     public $formTitle;
+    public $deleteId = '';
+    public $metodoDelete = 'delete';
 
     /**
      * Instantiate a new UserController instance.
@@ -35,12 +38,6 @@ class UserRole extends Component
         return view('livewire.user-roles.lw-user-roles')->layout('layouts.app');
     }
 
-    public function delete($key)
-    {
-        $result = Role::find($key)->delete();
-        $this->carregaRoles();
-    }   
-    
     public function new()
     {
         $this->formTitle = "Criar novo Modal";
@@ -76,6 +73,40 @@ class UserRole extends Component
     public function carregaRoles()
     {
         $this->roles = Role::all();
+    }  
+    
+    /**
+     * Armazeona o id para executar exclusão caso confirmado
+     *
+     * @return response()
+     */
+    public function delete($id)
+    {
+        $this->deleteId     = $id;
+        $this->modalDelete  = "true";
+        $this->metodoDelete = "deleteConfirm()";
+    } 
+
+    /**
+     * Exclui registro após confirmação
+     *
+     * @return response()
+     */    
+    public function deleteConfirm()
+    {
+        $result = Role::find($this->deleteId)->delete();
+        $this->carregaRoles();
+        $this->modalDeleteClose();
+    } 
+    
+    /**
+     * Fecha modalDelete sem excluir
+     *
+     * @return response()
+     */    
+    public function modalDeleteClose()
+    {
+        $this->modalDelete  = "false";
     }      
 
 }

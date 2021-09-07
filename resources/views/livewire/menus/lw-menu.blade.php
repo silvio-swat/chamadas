@@ -87,6 +87,7 @@
       </div>
       
       @include('livewire.menus.list-awesome-icons')
+      @include('layouts.delete-modal')
       {{-- Modal de Pages --}}
       @include('livewire.menus.form-page-modal')
       @include('livewire.menus.list-page-modal')
