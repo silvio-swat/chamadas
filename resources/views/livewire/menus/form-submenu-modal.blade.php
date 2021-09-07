@@ -35,10 +35,10 @@
                     <div class="modal--form-input-div-1">
                       <div class="modal--form-input-div-2">
                         <label class="modal--form-label" for="grid-password">
-                          Nome Exibição
+                          Nome Exibição(*)
                         </label>
                         <input wire:model="subMenuModel.name" class="modal--form-input"
-                          id="subMenuModel_name" type="text" placeholder="Digite para exibição">
+                          id="subMenuModel_name" type="text" placeholder="Digite o nome de exibição">
                           @error('subMenuModel.name') <span class="error">{{ $message }}</span> @enderror
                         <p class="modal--form-p-error"></p>
                       </div>
@@ -47,24 +47,35 @@
                     <div class="modal--form-input-div-1">
                       <div class="modal--form-input-div-2">
                         <label class="modal--form-label" for="grid-password">
-                          Ordem
+                          Ordem(*)
                         </label>
-                        <input wire:model="subMenuModel.order" class="modal--form-input" id="subMenuModel_order" type="number">
+                        <input wire:model="subMenuModel.order" class="modal--form-input" id="subMenuModel_order" 
+                        type="number" placeholder="Número para ordenar a exibição">
                         @error('subMenuModel.order') <span class="error">{{ $message }}</span> @enderror
                         <p class="modal--form-p-error"></p>
                       </div>
                     </div>         
                     
-                    <div class="modal--form-input-div-1">
+                    <div class="modal--form-input-div-1">                
                       <div class="modal--form-input-div-2">
-                        <label class="modal--form-label" for="grid-password">
-                          Controller
+                        <label class="modal--form-label" for="grid-state">
+                          Controller(*)
                         </label>
-                        <input wire:model="subMenuModel.controller" class="modal--form-input" id="subMenuModel_controller" type="text">
-                        @error('subMenuModel.controller') <span class="error">{{ $message }}</span> @enderror
-                        <p class="modal--form-p-error"></p>
+                        <div class="relative">
+                          <select wire:model="subMenuModel.controller" class="modal--form-select" id="subMenuModel_controller">
+                            <option value="">Escolha o Controller</option>
+                            @foreach ($selectControllers as $item)
+                              <option value="{{$item['value']}}">{{$item['descri']}}</option>
+                            @endforeach
+                          </select>
+                          @error('subMenuModel.name') <span class="error">{{ $message }}</span> @enderror
+                          <div class="modal--form-select-svg">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                          </div>
+                        </div>
                       </div>
-                    </div>   
+                    </div>     
                     
                     <div class="modal--form-input-div-1">
                       <div class="modal--form-input-div-2">
@@ -81,8 +92,8 @@
                     <div class="modal--form-input-div-1">                
                       <div class="modal--form-input-div-2">
                         <label class="modal--form-label" for="grid-state">
-                        Icone
-                      </label>
+                        Icone(*)
+                        </label>
                       <div class="relative">
                         <select wire:model="subMenuModel.icon" class="modal--form-select">
                           @foreach ($iconsArray['solid'] as $item)

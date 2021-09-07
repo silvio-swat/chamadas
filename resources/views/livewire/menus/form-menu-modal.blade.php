@@ -37,10 +37,10 @@
                     <div class="modal--form-input-div-1">
                       <div class="modal--form-input-div-2">
                         <label class="modal--form-label" for="grid-password">
-                          Nome Exibição
+                          Nome Exibição(*)
                         </label>
                         <input wire:model="menuModel.name" class="modal--form-input"
-                          id="menu_name" type="text" placeholder="Digite para exibição">
+                          id="menu_name" type="text" placeholder="Digite o nome de exibição">
                           @error('menuModel.name') <span class="error">{{ $message }}</span> @enderror
                         <p class="modal--form-p-error"></p>
                       </div>
@@ -49,9 +49,10 @@
                     <div class="modal--form-input-div-1">
                       <div class="modal--form-input-div-2">
                         <label class="modal--form-label" for="grid-password">
-                          Ordem
+                          Ordem(*)
                         </label>
-                        <input wire:model="menuModel.order" class="modal--form-input" id="grid-password" type="number" placeholder="Aplicado para os usuários">
+                        <input wire:model="menuModel.order" class="modal--form-input" id="grid-password" 
+                          type="number" placeholder="Número para ordenar a exibição">
                         @error('menuModel.order') <span class="error">{{ $message }}</span> @enderror
                         <p class="modal--form-p-error"></p>
                       </div>
@@ -60,10 +61,11 @@
                     <div class="modal--form-input-div-1">
                       <div class="modal--form-input-div-2">
                         <label class="modal--form-label" for="grid-state">
-                        Icone
+                        Icone(*)
                         </label>
                         <div class="relative">
                           <select wire:model="menuModel.icon" class="modal--form-select" id="grid-state">
+                            <option value="">Selecione um ícone</option>
                             @foreach ($iconsArray['solid'] as $item)
                               <option data-content="<i class='fa fa-{{$item}}'></i>" value="fa fa-{{$item}}">{{$item}}</option>
                             @endforeach
@@ -80,7 +82,7 @@
                     <div class="modal--form-input-div-1">
                       <div class="modal--form-input-div-2">
                         <label class="modal--form-label" for="grid-state">
-                          Permission
+                          Permission(*)
                         </label>
                         <div class="relative">
                           <select wire:model="menuModel.permission_id" class="modal--form-select" id="menuModel_permission_id">

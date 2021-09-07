@@ -4,14 +4,14 @@
       
       <!-- overlay transition-opacity transition-transform  -->
       <div 
-      x-show="isOpen" x-cloak
-      x-transition:enter="transition duration-300 transform"
-      x-transition:enter-start="opacity-0"
-      x-transition:enter-end="opacity-100"
-      x-transition:leave="transition duration-300 transform"
-      x-transition:leave-start="opacity-100"
-      x-transition:leave-end="opacity-0"
-      id="modal_overlay" class="pt-3 absolute inset-0 overflow-scroll bg-black bg-opacity-30 h-screen w-full items-start md:items-center md:pt-0">
+        x-show="isOpen" x-cloak
+        x-transition:enter="transition duration-300 transform"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition duration-300 transform"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        id="modal_overlay" class="pt-3 absolute inset-0 overflow-scroll bg-black bg-opacity-30 h-screen w-full items-start md:items-center md:pt-0">
       
         <!-- modal -translate-y-full scale-150  -->
         <div id="modal" 
@@ -26,7 +26,7 @@
         
             <!-- header -->
             <div class="modal--header">
-            <h2 class="modal--h2">{{$formTitle}}</h2>
+              <h2 class="modal--h2">{{$formTitle}}</h2>
             </div>
         
             <!-- body -->

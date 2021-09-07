@@ -82,6 +82,7 @@
     </div> 
     
     @include('livewire.user-roles.form-modal')
+    @include('layouts.delete-modal')
 
   </div>
 </div>    

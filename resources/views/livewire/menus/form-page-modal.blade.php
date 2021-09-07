@@ -39,7 +39,7 @@
                           Nome Exibição
                         </label>
                         <input wire:model="menuPageModel.name" class="modal--form-input"
-                          id="menuModel_name" type="text" placeholder="Digite para exibição">
+                          id="menuModel_name" type="text" placeholder="Digite o nome de exibição">
                           @error('menuPageModel.name') <span class="error">{{ $message }}</span> @enderror
                         <p class="modal--form-p-error"></p>
                       </div>
@@ -50,7 +50,8 @@
                         <label class="modal--form-label" for="grid-password">
                           Ordem
                         </label>
-                        <input wire:model="menuPageModel.order" class="modal--form-input" type="number">
+                        <input wire:model="menuPageModel.order" class="modal--form-input" type="number"
+                          placeholder="Número para ordenar a exibição">
                         @error('menuPageModel.order') <span class="error">{{ $message }}</span> @enderror
                         <p class="modal--form-p-error"></p>
                       </div>
@@ -63,8 +64,9 @@
                         </label>
                         <div class="relative">
                           <select wire:model="menuPageModel.icon"  class="modal--form-select">
+                            <option value="">Selecione um ícone</option>
                             @foreach ($iconsArray['solid'] as $item)
-                              <option data-content="<i class='fa fa-{{$item}}'></i>" value="fa fa-{{$item}}"> {{$item}}</option>
+                              <option data-content="<i class='fa fa-{{$item}}'></i>" value="fa fa-{{$item}}">{{$item}}</option>
                             @endforeach
                           </select>
                           @error('menuPageModel.icon') <span class="error">{{ $message }}</span> @enderror
