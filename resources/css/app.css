@@ -1,6 +1,113 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
+
+@layer components {
+
+    /* CSS Modal de Listas */
+    .modal--back--screen{
+        @apply fixed inset-0 pt-10 overflow-scroll bg-black bg-opacity-30 h-screen w-full
+            flex justify-center items-start md:items-center md:pt-0;
+    }
+    .modal--list{
+        @apply m-auto top-5 transform overflow-visible relative w-11/12 md:w-11/12 bg-white rounded shadow-lg;
+    }    
+    .modal--close--button{
+        @apply absolute -top-3 -right-3 bg-red-500 shadow hover:bg-red-600 text-2xl w-10 h-10 rounded-full focus:outline-none text-white;
+    }    
+    .new--button{
+        @apply relative text-white px-3 w-auto h-10 bg-blue-600 rounded-full shadow hover:bg-blue-700 transition ease-in duration-200 focus:outline-none;
+    }    
+
+    .delete--button{
+        @apply bg-red-500 hover:bg-red-600 px-4 py-2 rounded text-white focus:outline-none;
+    }  
+
+    .modal--header{
+        @apply px-4 py-3 border-b border-gray-200;
+    }    
+    .modal--h2{
+        @apply text-xl font-semibold text-gray-600;
+    }    
+    .modal--body{
+        @apply w-full p-20;
+    }  
+    .modal--body-div{
+        @apply max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8;
+    }      
+    .modal--table{
+        @apply min-w-full divide-y divide-gray-200;        
+    }   
+    .modal--table-thead{
+        @apply  bg-gray-200;        
+    }  
+    .modal--table-th{
+        @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;        
+    }  
+    .modal--table-tbody{
+        @apply  bg-white divide-y divide-gray-200;        
+    }  
+    
+    .modal--table-tr{
+        @apply  bg-purple-50 hover:bg-purple-100 ;        
+    }     
+
+    .modal--table-td{
+        @apply  px-6 py-4 whitespace-nowrap ;        
+    }  
+    .modal--table-div{
+        @apply  shadow overflow-hidden border-b border-gray-200 sm:rounded-lg my-3;        
+    }   
+    
+    /* CSS Modal de Formulários */
+    .modal--form{
+        @apply m-auto mt-3 transform relative md:w-1/3 bg-white rounded shadow-lg;
+    }
+
+    .modal--form-back{
+        @apply fixed inset-0 overflow-scroll bg-black bg-opacity-30 h-screen w-full flex justify-center items-start md:items-center pt-10 md:pt-0;
+    }
+
+    .modal--form-input-div-1{
+        @apply flex flex-wrap -mx-3 mb-6;
+    }
+    
+    .modal--form-input-div-2{
+        @apply w-full px-3;
+    }
+    
+    .modal--form-label{
+        @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
+    }    
+
+    .modal--form-input{
+        @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+    } 
+    
+    .modal--form-select{
+        @apply block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+    } 
+
+    .modal--form-p-error{
+        @apply text-gray-600 text-xs italic;
+    } 
+
+    .modal--form-class{
+        @apply w-full max-w-lg;
+    } 
+    .modal--form-select-svg{
+        @apply pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 ;
+    } 
+
+    .modal--form-save-button{
+        @apply  bg-green-500 hover:bg-green-600 px-4 py-2 rounded text-white focus:outline-none ;
+    } 
+    .modal--form-footer{
+        @apply  absolute bottom-0 left-0 px-4 py-3 border-t border-gray-200 w-full flex justify-end items-center gap-3;
+    }      
+
+}
+
 @import 'tailwindcss/utilities';
 
 
-
+    

@@ -27,69 +27,69 @@
       <div class="flex flex-col my-3">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <div class="modal--table-div">
   
-              <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+              <table class="modal--table">
+                <thead class="modal--table-thead">
                   <tr>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="modal--table-th">
                         Tipo
                     </th>                      
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="modal--table-th">
                         Nome de Exibição
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="modal--table-th">
                         permissão
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="modal--table-th">
                         Descrição
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="modal--table-th">
                         Menu
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="modal--table-th">
                         Controller
                     </th>   
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="modal--table-th">
                         Action
                     </th>                                                                                   
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="modal--table-th">
                       <span class="sr-only">Editar</span>
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="modal--table-th">
                       <span class="sr-only">Excluir</span>
                     </th>              
                   </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="modal--table-tbody">
       
                   @foreach($permissions as $permission)        
-                    <tr class="bg-emerald-200">
-                      <td class="px-6 py-4 whitespace-nowrap">
+                    <tr class="modal--table-tr">
+                      <td class="modal--table-td">
                         <span>{{ $permission->type }}</span>
                     </td>                      
-                      <td class="px-6 py-4 whitespace-nowrap">
+                      <td class="modal--table-td">
                           <span>{{ $permission->display_name }}</span>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap">
+                      <td class="modal--table-td">
                           <span>{{ $permission->name }}</span>
                       </td>     
-                      <td class="px-6 py-4 whitespace-nowrap">
+                      <td class="modal--table-td">
                         <span>{{ $permission->descri }}</span>
                     </td>                        
-                      <td class="px-6 py-4 whitespace-nowrap">
+                      <td class="modal--table-td">
                           <span>{{ $permission->menu }}</span>
                       </td>         
-                      <td class="px-6 py-4 whitespace-nowrap">
+                      <td class="modal--table-td">
                           <span>{{ $permission->controller }}</span>
                       </td>          
-                      <td class="px-6 py-4 whitespace-nowrap">
+                      <td class="modal--table-td">
                           <span>{{ $permission->action }}</span>
                       </td>                                                                      
-                      <td class="px-6 py-4 whitespace-nowrap">
+                      <td class="modal--table-td">
                           <button wire:click="edit({{$permission->id}})"><i class="fa fa-edit fa-xl"></i></button>
                       </td>  
-                      <td class="px-6 py-4 whitespace-nowrap">
+                      <td class="modal--table-td">
                           <button wire:click="delete({{$permission->id}})"><i class="fa fa-trash fa-xl"></i></button>
                       </td>                                
                     </tr>        

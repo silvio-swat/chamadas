@@ -20,23 +20,23 @@
             <button 
               @click="isOpen = false"
               wire:click="setModalClose()"
-              class="absolute -top-3 -right-3 bg-red-500 hover:bg-red-600 text-2xl w-10 h-10 rounded-full focus:outline-none text-white">
+              class="modal--close--button">
               &cross;
             </button>
         
             <!-- header -->
-            <div class="px-4 py-3 border-b border-gray-200">
-              <h2 class="text-xl font-semibold text-gray-600">{{$formTitle}}</h2>
+            <div class="modal--header">
+              <h2 class="modal--h2">{{$formTitle}}</h2>
             </div>
         
             <!-- body -->
-            <div class="w-full p-20">
+            <div class="modal--body">
 
-              <form class="w-full max-w-lg" wire:submit.prevent="submit({{$permissionModel}})">
+              <form class="modal--form-class" wire:submit.prevent="submit({{$permissionModel}})">
 
-                <div class="flex flex-wrap -mx-3 mb-6">                
-                <div class="w-full px-3">
-                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                <div class="modal--form-input-div-1">                
+                <div class="modal--form-input-div-2">
+                  <label class="modal--form-label" for="grid-state">
                     Tipo(*)
                   </label>
                   <div class="relative">
@@ -48,7 +48,7 @@
                       @endforeach
                     </select>
                     @error('permissionModel.type') <span class="error">{{ $message }}</span> @enderror
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <div class="modal--form-select-svg">
                       <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                     </div>
@@ -56,9 +56,9 @@
                 </div>
                 </div>
 
-                <div class="flex flex-wrap -mx-3 mb-6" x-show={{$permissionModel->type != "menu" ? 'false' : 'true'}}>                
-                  <div class="w-full px-3">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                <div class="modal--form-input-div-1" x-show={{$permissionModel->type != "menu" ? 'false' : 'true'}}>                
+                  <div class="modal--form-input-div-2">
+                    <label class="modal--form-label" for="grid-state">
                       Menu(*)
                     </label>
                     <div class="relative">
@@ -70,7 +70,7 @@
                         @endforeach
                       </select>
                       @error('permissionModel.name') <span class="error">{{ $message }}</span> @enderror
-                      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                      <div class="modal--form-select-svg">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                       </div>
@@ -78,9 +78,9 @@
                   </div>
                 </div>
 
-                  <div class="flex flex-wrap -mx-3 mb-6" x-show={{$permissionModel->type == "menu" ? 'false' : 'true'}}>                
-                    <div class="w-full px-3">
-                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                  <div class="modal--form-input-div-1" x-show={{$permissionModel->type == "menu" ? 'false' : 'true'}}>                
+                    <div class="modal--form-input-div-2">
+                      <label class="modal--form-label" for="grid-state">
                         Controller(*)
                       </label>
                       <div class="relative">
@@ -92,7 +92,7 @@
                           @endforeach
                         </select>
                         @error('permissionModel.name') <span class="error">{{ $message }}</span> @enderror
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <div class="modal--form-select-svg">
                           <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                         </div>
@@ -100,35 +100,35 @@
                     </div>
                   </div>                  
 
-              <div class="flex flex-wrap -mx-3 mb-6" x-show={{$permissionModel->type == "menu" ? 'false' : 'true'}}>
-                <div class="w-full px-3">
-                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+              <div class="modal--form-input-div-1" x-show={{$permissionModel->type == "menu" ? 'false' : 'true'}}>
+                <div class="modal--form-input-div-2">
+                  <label class="modal--form-label" for="grid-password">
                     Método
                   </label>
                   <input wire:model="permissionModel.method" class="appearance-none block w-full bg-gray-200 text-gray-700 border
                     border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="permissionModel_method" type="text" placeholder="Digite para exibição">
                     @error('permissionModel.method') <span class="error">{{ $message }}</span> @enderror
-                  <p class="text-gray-600 text-xs italic"></p>
+                  <p class="modal--form-p-error"></p>
                 </div>
               </div>
 
-              <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full px-3">
-                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+              <div class="modal--form-input-div-1">
+                <div class="modal--form-input-div-2">
+                  <label class="modal--form-label" for="grid-password">
                     Descrição
                   </label>
-                  <textarea wire:model="permissionModel.description" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="Aplicado para os usuários">
+                  <textarea wire:model="permissionModel.description" class="modal--form-input" id="grid-password" type="text" placeholder="Aplicado para os usuários">
                   </textarea>
                   @error('permissionModel.description') <span class="error">{{ $message }}</span> @enderror
-                  <p class="text-gray-600 text-xs italic"></p>
+                  <p class="modal--form-p-error"></p>
                 </div>
               </div>  
 
             </div>
         
             <!-- footer -->
-            <div class="absolute bottom-0 left-0 px-4 py-3 border-t border-gray-200 w-full flex justify-end items-center gap-3">
+            <div class="modal--form-footer">
             <button class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded 
             text-white focus:outline-none" type="submit">Save</button>
 
@@ -137,7 +137,7 @@
               <button 
                   @click="isOpen = false"
                   wire:click="setModalClose()"
-                  class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded text-white focus:outline-none"
+                  class="delete--button"
               >Close</button>
             </div>
         </div>

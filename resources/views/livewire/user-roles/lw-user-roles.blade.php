@@ -9,7 +9,7 @@
     </div>
   </div>
 
-<div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8">
+<div class="modal--body-div">
   <div class="py-3 ">
     <button
       wire:click="new()"
@@ -27,49 +27,49 @@
     <div class="flex flex-col my-3">
       <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+          <div class="modal--table-div">
 
-            <table class="min-w-full divide-y divide-gray-200">
-              <thead class="bg-gray-50">
+            <table class="modal--table">
+              <thead class="modal--table-thead">
                 <tr>
-                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th scope="col" class="modal--table-th">
                     Nome de Exibição
                   </th>
-                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th scope="col" class="modal--table-th">
                     Papel
                   </th>
-                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th scope="col" class="modal--table-th">
                     Descrição
                   </th>
-                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th scope="col" class="modal--table-th">
                     <span class="sr-only">Edit</span>
                   </th>
-                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th scope="col" class="modal--table-th">
                     <span class="sr-only">Excluir</span>
                   </th>              
                 </tr>
               </thead>
-              <tbody class="bg-white divide-y divide-gray-200">
+              <tbody class="modal--table-tbody">
     
                 @foreach($roles as $role)        
-                <tr class="bg-emerald-200">
+                <tr class="modal--table-tr">
     
-                    <td class="px-6 py-4 whitespace-nowrap">
+                    <td class="modal--table-td">
                         <span>{{ $role->display_name }}</span>
                     </td>
     
-                    <td class="px-6 py-4 whitespace-nowrap">
+                    <td class="modal--table-td">
                         <span>{{ $role->name }}</span>
                     </td>     
 
-                    <td class="px-6 py-4 whitespace-nowrap">
+                    <td class="modal--table-td">
                       <span>{{ $role->description }}</span>
                   </td>                             
                     
-                    <td class="px-6 py-4 whitespace-nowrap">
+                    <td class="modal--table-td">
                       <button wire:click="edit({{$role->id}})"><i class="fa fa-edit fa-xl"></i></button>
                     </td>  
-                    <td class="px-6 py-4 whitespace-nowrap">
+                    <td class="modal--table-td">
                       <button wire:click="delete({{$role->id}})"><i class="fa fa-trash fa-xl"></i></button>
                     </td>                                
                 </tr>        
