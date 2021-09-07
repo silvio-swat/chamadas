@@ -21,6 +21,11 @@ class LwParams extends CrudComponent
     public $paramId;
     public $opened;
 
+    public $modalDelete = "false";
+    public $deleteId = '';
+    public $metodoDelete = 'delete';
+    public $type = null;    
+
     /**
      * Instantiate a new UserController instance.
      */
@@ -167,5 +172,54 @@ class LwParams extends CrudComponent
                 $this->paramItems     = ParamItem::all();
             break;                     
         }
-    }     
+    }  
+    
+    /**
+     * Armazeona o id para executar exclusão caso confirmado
+     *
+     * @return response()
+     */
+    public function delete($key , $type)
+    {
+        $this->deleteId     = $key;
+        $this->modalDelete  = "true";
+        $this->type         = $type;
+        switch($type){
+            case 'Param':
+                $this->metodoDelete = "deleteConfirm('Param')";
+            break;
+            case 'ParamItem':
+                $this->metodoDelete = "deleteConfirm('ParamItem')";                
+            break;                       
+        }
+        $this->setListClose($type);
+    } 
+
+
+    public function deleteConfirm($type)
+    {
+        switch($type){
+            case 'Param':
+                $result = Param::find($this->deleteId)->delete();
+                $this->loadMenuPages();
+            break;
+            case 'ParamItem':
+                $result = ParamItem::find($this->deleteId)->delete();
+                $this->loadMenus();
+            break;                     
+        }
+        $this->modalDeleteClose();     
+        $this->alert('success', 'Excluído com sucesso');
+    }   
+    
+    /**
+     * Fecha modalDelete sem excluir
+     *
+     * @return response()
+     */    
+    public function modalDeleteClose()
+    {
+        $this->modalDelete  = "false";
+    }        
+
 }

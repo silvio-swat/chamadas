@@ -22,6 +22,7 @@ class LwMenu extends CrudComponent
     public $iconsArray = [];
     public $modalListIconsOpen = "false";
     public $selPermissions = [];
+    public $selectControllers = [];
 
     // Variaveis de Page
     public MenuPage $menuPageModel;
@@ -39,7 +40,12 @@ class LwMenu extends CrudComponent
     public $subMenus = [];
     public $modalFormSMOpen = "false";
     public $modalListSMOpen = "false";
-    public $menuId;    
+    public $menuId; 
+    
+    public $modalDelete = "false";
+    public $deleteId = '';
+    public $metodoDelete = 'delete';
+    public $type = null;  
 
     /**
      * Instantiate a new UserController instance.
@@ -59,26 +65,6 @@ class LwMenu extends CrudComponent
     {
         return view('livewire.menus.lw-menu')->layout('layouts.app');
     }
-
-    public function delete($key , $type)
-    {
-        switch($type){
-            case 'Page':
-                $result = MenuPage::find($key)->delete();
-                $this->loadMenuPages();
-            break;
-            case 'Menu':
-                $result = Menu::find($key)->delete();
-                $this->loadMenus();
-            break;
-            case 'SubMenu':
-                $result = SubMenu::find($key)->delete();
-                $this->loadSubMenus();
-            break;                        
-        }
-
-        $this->alert('success', 'Excluído com sucesso');        
-    }   
     
     public function new()
     {
@@ -256,7 +242,7 @@ class LwMenu extends CrudComponent
             break;     
             case 'Icons':
                 $this->modalListIconsOpen   = "true";
-                $this->formTitle         = "Lista de Icones";
+                $this->formTitle            = "Lista de Icones";
             break;                                
         }
     }
@@ -286,8 +272,66 @@ class LwMenu extends CrudComponent
 
     public function loadPemissionsSelect()
     {
-        $permissionSrv          = new PermissionService();
-        $this->selPermissions   = $permissionSrv->getPermissionSelectArray();
-    }         
+        $permissionSrv           = new PermissionService();
+        $this->selPermissions    = $permissionSrv->getPermissionSelectArray();
+        $this->selectControllers = $this->param->getSelectArray('ctr_comp');
+    }
+    
+    /**
+     * Armazeona o id para executar exclusão caso confirmado
+     *
+     * @return response()
+     */
+    public function delete($key , $type)
+    {
+        $this->deleteId     = $key;
+        $this->modalDelete  = "true";
+        $this->type         = $type;
+        switch($type){
+            case 'Page':
+                $this->metodoDelete = "deleteConfirm('Page')";
+            break;
+            case 'Menu':
+                $this->metodoDelete = "deleteConfirm('Menu')";                
+            break;
+            case 'SubMenu':
+                $this->metodoDelete = "deleteConfirm('SubMenu')";               
+            break;                        
+        }
+        $this->setListClose($type);
+    } 
+
+
+    public function deleteConfirm($type)
+    {
+        switch($type){
+            case 'Page':
+                $result = MenuPage::find($this->deleteId)->delete();
+                $this->loadMenuPages();
+            break;
+            case 'Menu':
+                $result = Menu::find($this->deleteId)->delete();
+                $this->loadMenus();
+            break;
+            case 'SubMenu':
+                $result = SubMenu::find($this->deleteId)->delete();
+                $this->loadSubMenus();
+            break;                        
+        }
+        $this->modalDeleteClose();     
+        $this->alert('success', 'Excluído com sucesso');
+        $this->list($type);
+    }   
+    
+    /**
+     * Fecha modalDelete sem excluir
+     *
+     * @return response()
+     */    
+    public function modalDeleteClose()
+    {
+        $this->modalDelete  = "false";
+        $this->list($this->type);
+    }          
      
 }
