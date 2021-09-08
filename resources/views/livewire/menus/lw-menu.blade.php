@@ -10,7 +10,7 @@
 
     <div class="py-3 mx-3">
       <button
-        wire:click="list('Page')"
+        wire:click="list('MenuPage')"
         class="relative text-white px-3 w-auto h-10 bg-blue-600 rounded-full hover:bg-blue-700
         active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
         <i class="fa fa-list"></i>
