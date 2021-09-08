@@ -19,7 +19,7 @@
                 onclick="openModal(false)"-->
               <button 
                 @click="isOpenPageForm = false"
-                wire:click="setFormClose('Page')"
+                wire:click="setFormClose('MenuPage')"
                 class="modal--close--button">
                 &cross;
               </button>
@@ -32,7 +32,7 @@
               <!-- body -->
               <div class="modal--body">
   
-                <form class="modal--form-class" wire:submit.prevent="submit({{$menuPageModel}}, 'Page')">
+                <form class="modal--form-class" wire:submit.prevent="submit({{$menuPageModel}}, 'MenuPage')">
                     <div class="modal--form-input-div-1">
                       <div class="modal--form-input-div-2">
                         <label class="modal--form-label" for="grid-password">
@@ -110,7 +110,7 @@
             </form>
                 <button 
                   @click="isOpenPageForm = false"
-                  wire:click="setFormClose('Page')"
+                  wire:click="setFormClose('MenuPage')"
                   class="delete--button"
                   >Close
                 </button>

@@ -19,7 +19,7 @@
                 onclick="openModal(false)"-->
               <button 
                 @click="isOpenPageList = false"
-                wire:click="setListClose('Page')"
+                wire:click="setListClose('MenuPage')"
                 class="modal--close--button ">
                 &cross;
               </button>
@@ -78,10 +78,10 @@
                             <span><i class="{{ $menuPage->icon  }}"></i> {{ $menuPage->icon }}</span>
                           </td>                                 
                           <td class="modal--table-td">
-                            <button wire:click="edit({{$menuPage->id}}, 'Page')"><i class="fa fa-edit fa-lg"></i></button>
+                            <button wire:click="edit({{$menuPage->id}}, 'MenuPage')"><i class="fa fa-edit fa-lg"></i></button>
                           </td>  
                           <td class="modal--table-td">
-                            <button wire:click="delete({{$menuPage->id}}, 'Page')"><i class="fa fa-trash fa-lg"></i></button>
+                            <button wire:click="delete({{$menuPage->id}}, 'MenuPage')"><i class="fa fa-trash fa-lg"></i></button>
                           </td>                                
                       </tr>        
                       @endforeach    
@@ -93,7 +93,7 @@
 
                 <button 
                   @click="isOpenPageList = false"
-                  wire:click="setListClose('Page')"
+                  wire:click="setListClose('MenuPage')"
                   class="delete--button"
                   >Close
                 </button>

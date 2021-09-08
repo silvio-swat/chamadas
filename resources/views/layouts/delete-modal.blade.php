@@ -25,7 +25,7 @@
                                 <p>Tem certeza que deseja excluir?</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" wire:click.prevent="{{$metodoDelete}}"
+                                <button type="button" wire:click.prevent="deleteConfirm()"
                                 class="btn btn-danger close-modal" data-dismiss="modal">Sim</button>
                                 <button type="button" wire:click.prevent="modalDeleteClose()" class="btn btn-secondary close-btn" data-dismiss="modal">Não</button>
                             </div>

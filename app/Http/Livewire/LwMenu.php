@@ -42,10 +42,8 @@ class LwMenu extends CrudComponent
     public $modalListSMOpen = "false";
     public $menuId; 
     
-    public $modalDelete = "false";
-    public $deleteId = '';
-    public $metodoDelete = 'delete';
-    public $type = null;  
+
+ 
 
     /**
      * Instantiate a new UserController instance.
@@ -71,7 +69,7 @@ class LwMenu extends CrudComponent
         $this->formTitle = "Criar nova Página de Menu";
         $this->menuPageModel = new MenuPage();
         $this->modalFormPageOpen = "true";
-        $this->setListClose('Page');
+        $this->setListClose('MenuPage');
     }   
     
     public function newMenu($id)
@@ -98,7 +96,7 @@ class LwMenu extends CrudComponent
     public function edit($id, $type)
     {
         switch($type){
-            case 'Page':
+            case 'MenuPage':
                 $this->menuPageModel = MenuPage::find($id);
                 $this->formTitle = "Edição da Página {$this->menuPageModel->name}";
                 $this->modalFormPageOpen = "true";
@@ -127,7 +125,7 @@ class LwMenu extends CrudComponent
         $this->validate();
         if(isset($model['id'])) {
             switch($type){
-                case 'Page':
+                case 'MenuPage':
                     $this->menuPageModel->update($model);
                 break;
                 case 'Menu':
@@ -139,7 +137,7 @@ class LwMenu extends CrudComponent
             }
         } else {
             switch($type){
-                case 'Page':
+                case 'MenuPage':
                     $this->menuPageModel->create($model);
                 break;
                 case 'Menu':
@@ -159,7 +157,7 @@ class LwMenu extends CrudComponent
     public function setFormClose($type)
     {
         switch($type){
-            case 'Page':              
+            case 'MenuPage':              
                 $this->modalFormPageOpen = "false";
                 $this->list($type);
             break;
@@ -177,7 +175,7 @@ class LwMenu extends CrudComponent
     public function setListClose($type)
     {
         switch($type){
-            case 'Page':
+            case 'MenuPage':
                 $this->modalListPageOpen = "false";
             break;
             case 'Menu':
@@ -223,7 +221,7 @@ class LwMenu extends CrudComponent
     {
         $this->opened = $type;
         switch($type){
-            case 'Page':
+            case 'MenuPage':
                 $this->loadMenuPages();                  
                 $this->modalListPageOpen = "true";
                 $this->formTitle         = "Lista de páginas de menu";
@@ -252,7 +250,7 @@ class LwMenu extends CrudComponent
     {
         $srv = null;
         switch($this->opened) {
-            case 'Page':
+            case 'MenuPage':
                 $srv = new MenuPageRequest();
                 $this->messages = $srv->messages();
                 return $srv->rules();
@@ -282,45 +280,32 @@ class LwMenu extends CrudComponent
      *
      * @return response()
      */
-    public function delete($key , $type)
+    public function delete($key , $type = null)
     {
-        $this->deleteId     = $key;
-        $this->modalDelete  = "true";
-        $this->type         = $type;
-        switch($type){
-            case 'Page':
-                $this->metodoDelete = "deleteConfirm('Page')";
-            break;
-            case 'Menu':
-                $this->metodoDelete = "deleteConfirm('Menu')";                
-            break;
-            case 'SubMenu':
-                $this->metodoDelete = "deleteConfirm('SubMenu')";               
-            break;                        
-        }
         $this->setListClose($type);
+        parent::delete($key, $type);
     } 
 
 
-    public function deleteConfirm($type)
+    public function deleteConfirm()
     {
-        switch($type){
-            case 'Page':
-                $result = MenuPage::find($this->deleteId)->delete();
+        $classname = "App\\Models\\".$this->type;
+        $newClasse = new $classname();
+        $result = $newClasse->find($this->deleteId)->delete();
+        switch($this->type){
+            case 'MenuPage':
                 $this->loadMenuPages();
             break;
             case 'Menu':
-                $result = Menu::find($this->deleteId)->delete();
                 $this->loadMenus();
             break;
             case 'SubMenu':
-                $result = SubMenu::find($this->deleteId)->delete();
                 $this->loadSubMenus();
             break;                        
         }
         $this->modalDeleteClose();     
         $this->alert('success', 'Excluído com sucesso');
-        $this->list($type);
+        $this->list($this->type);
     }   
     
     /**
@@ -330,7 +315,7 @@ class LwMenu extends CrudComponent
      */    
     public function modalDeleteClose()
     {
-        $this->modalDelete  = "false";
+        parent::modalDeleteClose();
         $this->list($this->type);
     }          
      
