@@ -9,12 +9,12 @@ use App\Services\PermissionService;
 
 class LwPermissions extends CrudComponent
 {
-    public $header = "Permissões de acesso de recursos do sistema";
-    public $permissions       = [];
-    public $selectTipos       = [];
-    public $selectMenus       = [];
-    public $selectControllers = [];
-    public Permission $permissionModel;
+    public   $header = "Permissões de acesso de recursos do sistema";
+    public   $permissions       = [];
+    public   $selectTipos       = [];
+    public   $selectMenus       = [];
+    public   $selectControllers = [];
+    public   Permission $permissionModel;
     protected $rules   = [];
     protected $message = [];
 
@@ -37,9 +37,9 @@ class LwPermissions extends CrudComponent
         return view('livewire.permissions.lw-permissions');
     }
 
-    public function delete($key)
+    public function deleteConfirm()
     {
-        $result = Permission::find($key)->delete();
+        $result = Permission::find($this->deleteId)->delete();
         $this->carregaPermissions();
         $this->alert('success', 'Excluído com sucesso');
     }   
@@ -83,7 +83,6 @@ class LwPermissions extends CrudComponent
         $this->carregaPermissions();
         $this->modalOpen = "false";
         $this->alert('success', 'Salvo com sucesso'); 
-
     } 
     
     public function setModalClose()

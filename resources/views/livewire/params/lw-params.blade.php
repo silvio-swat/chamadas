@@ -131,6 +131,7 @@
       
       @include('livewire.params.form-param-modal')
       @include('livewire.params.form-param-item-modal')      
+      @include('layouts.delete-modal')      
   
     </div>
   </div>    

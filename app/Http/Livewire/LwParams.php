@@ -21,9 +21,6 @@ class LwParams extends CrudComponent
     public $paramId;
     public $opened;
 
-    public $modalDelete = "false";
-    public $deleteId = '';
-    public $metodoDelete = 'delete';
     public $type = null;    
 
     /**
@@ -162,64 +159,24 @@ class LwParams extends CrudComponent
     }     
 
     // Seta regras de formulario conforme lista e form new ou edit clicados por conseguinte
-    protected function carregaDados($type)
+    protected function carregaDados($type = null)
     {
-        switch($type) {
-            case 'param':
-                $this->params         = Param::all();
-            break;
-            case 'paramItem':
-                $this->paramItems     = ParamItem::all();
-            break;                     
-        }
+        $this->params         = Param::all();
     }  
     
-    /**
-     * Armazeona o id para executar exclusão caso confirmado
-     *
-     * @return response()
-     */
-    public function delete($key , $type)
+    public function deleteConfirm()
     {
-        $this->deleteId     = $key;
-        $this->modalDelete  = "true";
-        $this->type         = $type;
-        switch($type){
-            case 'Param':
-                $this->metodoDelete = "deleteConfirm('Param')";
-            break;
-            case 'ParamItem':
-                $this->metodoDelete = "deleteConfirm('ParamItem')";                
-            break;                       
-        }
-        $this->setListClose($type);
-    } 
-
-
-    public function deleteConfirm($type)
-    {
-        switch($type){
-            case 'Param':
+        switch($this->type){
+            case "param":
                 $result = Param::find($this->deleteId)->delete();
-                $this->loadMenuPages();
             break;
-            case 'ParamItem':
+            case "paramItem":
                 $result = ParamItem::find($this->deleteId)->delete();
-                $this->loadMenus();
             break;                     
         }
+        $this->carregaDados();
         $this->modalDeleteClose();     
         $this->alert('success', 'Excluído com sucesso');
     }   
     
-    /**
-     * Fecha modalDelete sem excluir
-     *
-     * @return response()
-     */    
-    public function modalDeleteClose()
-    {
-        $this->modalDelete  = "false";
-    }        
-
 }

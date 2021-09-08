@@ -18,11 +18,8 @@ class UserRole extends Component
 
     public $search      = null;
     public $modalOpen   = "false";
-    public $modalDelete = "false";
     public $testeinput  = "Teste de preenchimento de campo";
     public $formTitle;
-    public $deleteId = '';
-    public $metodoDelete = 'delete';
 
     /**
      * Instantiate a new UserController instance.
@@ -74,18 +71,6 @@ class UserRole extends Component
     {
         $this->roles = Role::all();
     }  
-    
-    /**
-     * Armazeona o id para executar exclusão caso confirmado
-     *
-     * @return response()
-     */
-    public function delete($id)
-    {
-        $this->deleteId     = $id;
-        $this->modalDelete  = "true";
-        $this->metodoDelete = "deleteConfirm()";
-    } 
 
     /**
      * Exclui registro após confirmação
@@ -99,14 +84,6 @@ class UserRole extends Component
         $this->modalDeleteClose();
     } 
     
-    /**
-     * Fecha modalDelete sem excluir
-     *
-     * @return response()
-     */    
-    public function modalDeleteClose()
-    {
-        $this->modalDelete  = "false";
-    }      
+ 
 
 }
