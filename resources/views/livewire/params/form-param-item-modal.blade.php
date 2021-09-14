@@ -1,6 +1,6 @@
     <!-------------------------------   HTML do modal para testar o Alpine ---------------------------->
 
-    <div x-data="{ isOpenPItem: {{ $modalItemOpen }} }">
+    <div x-data="{ isOpenPItem: {{ $modalForm == 'ParamItem' ? 'true' : 'false' }}  }">
 
       
       <!-- overlay transition-opacity transition-transform  -->
@@ -23,7 +23,7 @@
               onclick="openModal(false)"-->
             <button 
               @click="isOpenPItem = false"
-              wire:click="setModalClose('paramItem')"
+              wire:click="setFormClose()"
               class="modal--close--button">
               &cross;
             </button>
@@ -36,7 +36,7 @@
             <!-- body -->
             <div class="modal--body">
 
-              <form class="modal--form-class" wire:submit.prevent="submit({{$paramItemModel}}, 'paramItem')">
+              <form class="modal--form-class" wire:submit.prevent="submit({{$paramItemModel}}, 'ParamItem')">
                   <div class="modal--form-input-div-1">
                     <div class="modal--form-input-div-2">
                       <label class="modal--form-label" for="grid-password">
@@ -71,7 +71,7 @@
               <!-- onclick="openModal(false)" -->
               <button 
                   @click="isOpenPItem = false"
-                  wire:click="setModalClose('paramItem')"
+                  wire:click="setFormClose()"
                   class="delete--button"
               >Close</button>
             </div>

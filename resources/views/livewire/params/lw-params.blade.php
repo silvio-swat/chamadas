@@ -63,7 +63,7 @@
                       <td class="modal--table-td">
                         <div class="py-3 ">
                           <button
-                            wire:click="newItem({{ $param->id}}, 'paramItem')"
+                            wire:click="newItem({{ $param->id}}, 'ParamItem')"
                             class="relative text-white px-3 w-auto h-10 bg-blue-600 rounded-full hover:bg-blue-700
                             active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
                             <svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" class="w-6 h-6 inline-block">
@@ -103,10 +103,10 @@
                                   {{ $item->descricao }}
                               </td>     
                               <td class="px-3 py-2 whitespace-nowrap">
-                                <button wire:click="edit({{$item->id}}, 'paramItem')"><i class="fa fa-edit fa-lg"></i></button>
+                                <button wire:click="edit({{$item->id}}, 'ParamItem')"><i class="fa fa-edit fa-lg"></i></button>
                               </td>  
                               <td class="px-3 py-2 whitespace-nowrap">
-                                <button wire:click="delete({{$item->id}}, 'paramItem')"><i class="fa fa-trash fa-lg"></i></button>
+                                <button wire:click="delete({{$item->id}}, 'ParamItem')"><i class="fa fa-trash fa-lg"></i></button>
                               </td>                                
                           </tr>        
                           @endforeach  
@@ -114,10 +114,10 @@
                       </td>                             
                       
                       <td class="modal--table-td">
-                        <button wire:click="edit({{$param->id}}, 'param')"><i class="fa fa-edit fa-lg"></i></button>
+                        <button wire:click="edit({{$param->id}}, 'Param')"><i class="fa fa-edit fa-lg"></i></button>
                       </td>  
                       <td class="modal--table-td">
-                        <button wire:click="delete({{$param->id}}, 'param')"><i class="fa fa-trash fa-lg"></i></button>
+                        <button wire:click="delete({{$param->id}}, 'Param')"><i class="fa fa-trash fa-lg"></i></button>
                       </td>                                
                   </tr>        
                   @endforeach    

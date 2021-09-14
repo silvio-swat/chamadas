@@ -1,5 +1,5 @@
       <!-------------------------------   HTML do modal do form ---------------------------->
-      <div x-data="{ isOpenSMForm: {{ $modalFormSMOpen }} }">
+      <div x-data="{ isOpenSMForm: {{ $modalForm == 'SubMenu' ? 'true' : 'false' }} }">
         
         <!-- overlay transition-opacity transition-transform  -->
         <div 
@@ -18,7 +18,7 @@
           class="modal--form" >
               <button 
                 @click="isOpenSMForm = false"
-                wire:click="setFormClose('SubMenu')"
+                wire:click="setFormClose()"
                 class="modal--close--button">
                 &cross;
               </button>
@@ -141,7 +141,7 @@
                 <!-- onclick="openModal(false)" -->
                 <button 
                     @click="isOpenSMForm = false"
-                    wire:click="setFormClose('SubMenu')"
+                    wire:click="setFormClose()"
                     class="delete--button"
                 >Close</button>
               </div>
