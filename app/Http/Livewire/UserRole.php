@@ -3,9 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Role;
-use Livewire\Component;
 
-class UserRole extends Component
+class UserRole extends CrudComponent
 {
     public $header = "Papeis de Usuários";
     public $roles = [];
@@ -24,66 +23,32 @@ class UserRole extends Component
     /**
      * Instantiate a new UserController instance.
      */
-    public function __construct()
+    public function mount()
     {
-        $this->roleModel = new Role();
-        $this->carregaRoles();
+        $this->type = 'Role';
+        $this->load();
     }   
 
     public function render()
     {
-        return view('livewire.user-roles.lw-user-roles')->layout('layouts.app');
+        return view('livewire.user-roles.lw-user-roles');
     }
 
-    public function new()
+    public function new($type = null)
     {
         $this->formTitle = "Criar novo Modal";
-        $this->roleModel = new Role();
-        $this->modalOpen = "true";
+        $this->roleModel = parent::new($type);
     }     
     
-    public function edit($key)
+    public function edit($key, $type)
     {
-        $this->roleModel = Role::find($key);
+        $this->roleModel = parent::edit($key, $type);
         $this->formTitle = "Editação de Papel de {$this->roleModel->name}";
-        $this->modalOpen = "true";
-    } 
-
-    public function submit($roleModel)
-    {
-        $this->validate();
-
-        if(!empty($this->roleModel->id)) {
-            $this->roleModel->update($roleModel);
-        } else {
-            $this->roleModel->create($roleModel);
-        }
-        $this->carregaRoles();
-        $this->modalOpen = "false";
-    } 
+    }
     
-    public function setModalClose()
+    public function load()
     {
-        $this->modalOpen = "false";
+        $this->roles = parent::load();
     }  
-    
-    public function carregaRoles()
-    {
-        $this->roles = Role::all();
-    }  
-
-    /**
-     * Exclui registro após confirmação
-     *
-     * @return response()
-     */    
-    public function deleteConfirm()
-    {
-        $result = Role::find($this->deleteId)->delete();
-        $this->carregaRoles();
-        $this->modalDeleteClose();
-    } 
-    
- 
 
 }

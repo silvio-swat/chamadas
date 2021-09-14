@@ -1,6 +1,6 @@
     <!-------------------------------   HTML do modal para testar o Alpine ---------------------------->
     <!-- onclick="openModal(true)" -->
-    <div x-data="{ isOpen: {{ $modalOpen }} }">
+    <div x-data="{ isOpen: {{ $modalForm == 'Role' ? 'true' : 'false' }}  }">
       
       <!-- overlay transition-opacity transition-transform  -->
       <div 
@@ -19,7 +19,7 @@
         
             <button 
               @click="isOpen = false"
-              wire:click="setModalClose()"
+              wire:click="setFormClose()"
               class="modal--close--button">
               &cross;
             </button>
@@ -32,7 +32,7 @@
             <!-- body -->
             <div class="modal--body">
 
-              <form class="modal--form-class" wire:submit.prevent="submit({{$roleModel}})">
+              <form class="modal--form-class" wire:submit.prevent="submit({{$roleModel}}, 'Role')">
                   <div class="modal--form-input-div-1">
                     <div class="modal--form-input-div-2">
                       <label class="modal--form-label" for="grid-password">
@@ -80,7 +80,7 @@
               <!-- onclick="openModal(false)" -->
               <button 
                   @click="isOpen = false"
-                  wire:click="setModalClose()"
+                  wire:click="setFormClose()"
                   class="delete--button"
               >Close</button>
             </div>

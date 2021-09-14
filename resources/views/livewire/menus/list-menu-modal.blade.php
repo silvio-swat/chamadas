@@ -1,6 +1,6 @@
       <!-------------------------------   HTML do modal do form ---------------------------->
       <!-- onclick="openModal(true)" -->
-      <div x-data="{ isOpenMenuList: {{ $modalListMOpen }} }">
+      <div x-data="{ isOpenMenuList: {{ $modalList == 'Menu' ? 'true' : 'false' }} }">
         
         <!-- overlay transition-opacity transition-transform  -->
         <div 
@@ -34,7 +34,7 @@
               <div class="modal--body-div">
                 <div class="py-2 ">
                   <button
-                    wire:click="newMenu({{ $menuPageId, 'Menu'}})"
+                    wire:click="new({{ $menuPageId }})"
                     class="new--button">
                     <i class="fa fa-plus"></i>
                     <span>New Menu</span>

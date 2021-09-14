@@ -1,6 +1,6 @@
       <!-------------------------------   HTML do modal do form ---------------------------->
       <!-- onclick="openModal(true)" -->
-      <div x-data="{ isOpenListIcons: {{ $modalListIconsOpen }}}">
+      <div x-data="{ isOpenListIcons: {{ $modalList == 'Icons' ? 'true' : 'false' }}}">
         
         <!-- overlay transition-opacity transition-transform  -->
         <div 

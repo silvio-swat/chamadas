@@ -16,7 +16,18 @@
     }    
     .new--button{
         @apply relative text-white px-3 w-auto h-10 bg-blue-600 rounded-full shadow hover:bg-blue-700 transition ease-in duration-200 focus:outline-none;
+    }
+    
+    .red--button{
+        @apply relative text-white px-3 w-auto h-10 bg-red-500 rounded-full shadow hover:bg-red-600 transition ease-in duration-200 focus:outline-none;
     }    
+
+    .little--btn-blue{
+        @apply relative text-white px-2 w-auto h-6 bg-blue-600 rounded-full shadow hover:bg-blue-700 transition ease-in duration-200 focus:outline-none;
+    }     
+    .little--btn-red{
+        @apply relative text-white px-2 w-auto h-6 bg-red-500 rounded-full shadow hover:bg-red-600 transition ease-in duration-200 focus:outline-none;
+    }           
 
     .delete--button{
         @apply bg-red-500 hover:bg-red-600 px-4 py-2 rounded text-white focus:outline-none;
@@ -29,19 +40,19 @@
         @apply text-xl font-semibold text-gray-600;
     }    
     .modal--body{
-        @apply w-full p-20;
+        @apply w-full px-14 pb-16 pt-8;
     }  
     .modal--body-div{
-        @apply max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8;
+        @apply w-full mx-auto py-2 px-2 sm:px-2 lg:px-2;
     }      
     .modal--table{
-        @apply min-w-full divide-y divide-gray-200;        
+        @apply divide-y divide-gray-200 w-full;        
     }   
     .modal--table-thead{
         @apply  bg-gray-200;        
     }  
     .modal--table-th{
-        @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;        
+        @apply px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;        
     }  
     .modal--table-tbody{
         @apply  bg-white divide-y divide-gray-200;        
@@ -52,7 +63,7 @@
     }     
 
     .modal--table-td{
-        @apply  px-6 py-4 whitespace-nowrap ;        
+        @apply  px-4 py-2 whitespace-nowrap ;        
     }  
     .modal--table-div{
         @apply  shadow overflow-hidden border-b border-gray-200 sm:rounded-lg my-3;        
@@ -60,7 +71,7 @@
     
     /* CSS Modal de Formulários */
     .modal--form{
-        @apply m-auto mt-3 transform relative md:w-1/3 bg-white rounded shadow-lg;
+        @apply m-auto mt-3 transform relative md:w-3/4 bg-white rounded shadow-lg;
     }
 
     .modal--form-back{
@@ -68,7 +79,7 @@
     }
 
     .modal--form-input-div-1{
-        @apply flex flex-wrap -mx-3 mb-6;
+        @apply flex flex-wrap -mx-3 mb-3;
     }
     
     .modal--form-input-div-2{
@@ -80,11 +91,14 @@
     }    
 
     .modal--form-input{
-        @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-4 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+        @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+    } 
+    .modal--form-text{
+        @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-6 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
     } 
     
     .modal--form-select{
-        @apply block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-4 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
+        @apply block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500;
     } 
 
     .modal--form-p-error{
@@ -92,7 +106,7 @@
     } 
 
     .modal--form-class{
-        @apply w-full max-w-lg;
+        @apply w-full;
     } 
     .modal--form-select-svg{
         @apply pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 ;
