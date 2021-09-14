@@ -1,5 +1,5 @@
       <!-------------------------------   HTML do modal do form ---------------------------->
-      <div x-data="{ isOpenPageForm: {{ $modalFormPageOpen }} }">
+      <div x-data="{ isOpenPageForm: {{ $modalForm == 'MenuPage' ? 'true' : 'false' }} }">
         
         <!-- overlay transition-opacity transition-transform  -->
         <div 
@@ -19,7 +19,7 @@
                 onclick="openModal(false)"-->
               <button 
                 @click="isOpenPageForm = false"
-                wire:click="setFormClose('MenuPage')"
+                wire:click="setFormClose()"
                 class="modal--close--button">
                 &cross;
               </button>
@@ -110,7 +110,7 @@
             </form>
                 <button 
                   @click="isOpenPageForm = false"
-                  wire:click="setFormClose('MenuPage')"
+                  wire:click="setFormClose()"
                   class="delete--button"
                   >Close
                 </button>

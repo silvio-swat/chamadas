@@ -1,5 +1,5 @@
     <!-------------------------------   HTML do modal para testar o Alpine ---------------------------->
-    <div x-data="{ isOpen: {{ $modalOpen }} }">
+    <div x-data="{ isOpen: {{ $modalForm == 'Permission' ? 'true' : 'false' }}  }">
       
       <!-- overlay transition-opacity transition-transform  -->
       <div 
@@ -17,7 +17,7 @@
         
           <button 
             @click="isOpen = false"
-            wire:click="setModalClose()"
+            wire:click="setFormClose()"
             class="modal--close--button">
             &cross;
           </button>
@@ -30,7 +30,7 @@
           <!-- body -->
           <div class="modal--body">
 
-            <form class="modal--form-class" wire:submit.prevent="submit({{$permissionModel}})">
+            <form class="modal--form-class" wire:submit.prevent="submit({{$permissionModel}}, 'Permission')">
 
               <div class="modal--form-input-div-1">                
                 <div class="modal--form-input-div-2">
@@ -111,7 +111,7 @@
                   <label class="modal--form-label" for="grid-password">
                     Descrição
                   </label>
-                  <textarea wire:model="permissionModel.description" class="modal--form-input" 
+                  <textarea wire:model="permissionModel.description" class="modal--form-text" 
                     id="grid-password" type="text" placeholder="Descrição da permissão">
                   </textarea>
                   @error('permissionModel.description') <span class="error">{{ $message }}</span> @enderror
@@ -129,7 +129,7 @@
               <!-- onclick="openModal(false)" -->
               <button 
                   @click="isOpen = false"
-                  wire:click="setModalClose()"
+                  wire:click="setFormClose()"
                   class="delete--button"
               >Close</button>
             </div>

@@ -67,10 +67,10 @@
                   </td>                             
                     
                     <td class="modal--table-td">
-                      <button wire:click="edit({{$role->id}})"><i class="fa fa-edit fa-xl"></i></button>
+                      <button wire:click="edit({{$role->id}}, 'Role')"><i class="fa fa-edit fa-xl"></i></button>
                     </td>  
                     <td class="modal--table-td">
-                      <button wire:click="delete({{$role->id}})"><i class="fa fa-trash fa-xl"></i></button>
+                      <button wire:click="delete({{$role->id}}, 'Role')"><i class="fa fa-trash fa-xl"></i></button>
                     </td>                                
                 </tr>        
                 @endforeach    

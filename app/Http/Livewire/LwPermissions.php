@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Http\Requests\PermissionRequest;
 use App\Models\Permission;
-use App\Services\Helpers\ParametrosService;
 use App\Services\PermissionService;
 
 class LwPermissions extends CrudComponent
@@ -15,21 +14,19 @@ class LwPermissions extends CrudComponent
     public   $selectMenus       = [];
     public   $selectControllers = [];
     public   Permission $permissionModel;
-    protected $rules   = [];
-    protected $message = [];
 
     public $search = null;
-    public $modalOpen = "false";
-    public $formTitle;
 
     /**
      * Instantiate a new UserController instance.
      */
     public function mount()
     {
-        $this->param = new ParametrosService();           
+        $this->classNSpace = "App\\Models\\";
+        $this->loadSelects();
         $this->permissionModel = new Permission();
-        $this->carregaPermissions();
+        $this->type = 'Permission';
+        $this->load();
     }       
 
     public function render()
@@ -37,29 +34,23 @@ class LwPermissions extends CrudComponent
         return view('livewire.permissions.lw-permissions');
     }
 
-    public function deleteConfirm()
+    /**
+     * Instancia uma classe para um novo form
+     * @author Silvio Watakabe <silvio@tcmed.com.br>
+     * @version 1.0
+     */      
+    public function new($type = null)
     {
-        $result = Permission::find($this->deleteId)->delete();
-        $this->carregaPermissions();
-        $this->alert('success', 'Excluído com sucesso');
-    }   
-    
-    public function new()
+        $this->permissionModel = parent::new($type);
+    }        
+
+    public function edit($key, $type)
     {
-        $this->carregaSelects();
-        $this->formTitle = "Criar nova permissão";
-        $this->permissionModel = new Permission();      
-        $this->setModalOpen();
-    }     
-    
-    public function edit($key)
-    {
-        $this->permissionModel = Permission::find($key);
-        $this->formTitle = "Editação de Permissão {$this->permissionModel->display_name}";
-        $this->setModalOpen();
+        $this->permissionModel = parent::edit($key, $type);
+        $this->formTitle       = "Editação de Permissão {$this->permissionModel->display_name}";
     } 
 
-    public function submit($model)
+    public function submit($model, $type)
     {   
         // Preenche o name acl aplicavel
         $this->permissionModel->name = $this->permissionModel->type . ":" .
@@ -71,38 +62,26 @@ class LwPermissions extends CrudComponent
         $this->permissionModel->display_name = $permitionSrv->buildDisplayName($this->permissionModel,
             $this->selectTipos, $this->selectMenus, $this->selectControllers);
         $model['display_name'] = $this->permissionModel->display_name;
-
-        $this->validate();
-
-        if(!empty($this->permissionModel->id)) {
-            $this->permissionModel->update($model);
-        } else {
-            $this->permissionModel->create($model);
+        // Valida os campos menu e controller
+        if($model['type'] == 'menu' && !$model['menu'] ){
+            $this->alert('error', 'Selecione um Menu');  
         }
+        if($model['type'] != 'menu' && !$model['controller'] ){
+            $this->alert('error', 'Selecione um Controller ou Menu');  
+        }        
 
-        $this->carregaPermissions();
-        $this->modalOpen = "false";
-        $this->alert('success', 'Salvo com sucesso'); 
+        parent::submit($model, $type);
+        $this->load();
     } 
     
-    public function setModalClose()
+    // Seta regras de formulario conforme lista e form new ou edit clicados por conseguinte
+    protected function load()
     {
-        $this->modalOpen = "false";
-    }  
+        $this->permissions         = parent::load();
+    }   
 
-    public function setModalOpen()
+    public function loadSelects()
     {
-        $this->modalOpen = "true";
-    }      
-    
-    public function carregaPermissions()
-    {
-        $this->permissions = Permission::all();
-    }    
-
-    public function carregaSelects()
-    {
-        // $param = new ParametrosService();
         $this->selectTipos       = $this->param->getSelectArray('permissionsType');
         $this->selectControllers = $this->param->getSelectArray('ctr_comp');
         $this->selectMenus       = $this->param->getSelectMenusArray();
@@ -113,7 +92,7 @@ class LwPermissions extends CrudComponent
     {
         $srv = new PermissionRequest();
         $this->messages = $srv->messages();
-        return $srv->rules();    
-    } 
+        return $srv->rules();
+    }     
 
 }

@@ -32,7 +32,7 @@
               <table class="modal--table">
                 <thead class="modal--table-thead">
                   <tr>
-                    <th scope="col" class="modal--table-th">
+                    <th scope="col" class="modal--table-th ">
                         Tipo
                     </th>                      
                     <th scope="col" class="modal--table-th">
@@ -87,10 +87,10 @@
                           <span>{{ $permission->action }}</span>
                       </td>                                                                      
                       <td class="modal--table-td">
-                          <button wire:click="edit({{$permission->id}})"><i class="fa fa-edit fa-xl"></i></button>
+                          <button wire:click="edit({{$permission->id}}, 'Permission')"><i class="fa fa-edit fa-xl"></i></button>
                       </td>  
                       <td class="modal--table-td">
-                          <button wire:click="delete({{$permission->id}})"><i class="fa fa-trash fa-xl"></i></button>
+                          <button wire:click="delete({{$permission->id}}, 'Permission')"><i class="fa fa-trash fa-xl"></i></button>
                       </td>                                
                     </tr>        
                   @endforeach    
@@ -102,7 +102,8 @@
       </div> 
       
       @include('livewire.permissions.form-modal')
-  
+      @include('layouts.delete-modal')
+
     </div>
   </div>    
   

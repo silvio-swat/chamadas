@@ -1,6 +1,6 @@
       <!-------------------------------   HTML do modal do form ---------------------------->
       <!-- onclick="openModal(true)" -->
-      <div x-data="{ isOpenPageList: {{ $modalListPageOpen }} }">
+      <div x-data="{ isOpenPageList: {{ $modalList == 'MenuPage' ? 'true' : 'false' }} }">
         
         <!-- overlay transition-opacity transition-transform  -->
         <div 
