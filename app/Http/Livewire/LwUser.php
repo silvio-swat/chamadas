@@ -36,22 +36,22 @@ class LwUser extends CrudComponent
         $this->users = parent::load();
     }
     
-    public function new($type = null)
+    public function new($type = null, $id = null)
     {
         $this->type = $type;
-        switch($type) {
+        switch($this->type ) {
             case 'User':
                 $this->model = 'userModel';
                 $this->formTitle = "Criar novo Usuário";
-                $this->userModel = parent::new($type);
+                $this->userModel = parent::new($type);                
             break;
             case 'Role':
                 $this->model = 'roleModel';
                 $this->formTitle = "Adicionar Papel";
                 $this->roleModel = parent::new($type);
+                $this->userModel = User::find($id);          
             break;            
         }
-
     }     
     
     public function edit($key, $type)
@@ -78,13 +78,25 @@ class LwUser extends CrudComponent
      */       
     public function submit($model, $type)
     {
-        $data                           = $this->validate();
-        $data['userModel']['password']  = Hash::make($data['password']);
-        $isNewUser = !isset($data['userModel']['id']) ? true : false ;
-        $user = parent::submit($data['userModel'], $type);
-        if(!empty($user) and $isNewUser) {
-            $user->attachRole($data['roleId']);
+        switch($this->type) {
+            case 'User':
+                $data                           = $this->validate();
+                $data['userModel']['password']  = Hash::make($data['password']);
+                $isNewUser = !isset($data['userModel']['id']) ? true : false ;
+                $user = parent::submit($data['userModel'], $type);
+                if(!empty($user) and $isNewUser) {
+                    $user->attachRole($data['roleId']);
+                }             
+            break;
+            case 'Role':
+                $this->roleModel = Role::find($this->roleId);
+                $this->userModel->attachRole($this->roleModel);
+                $this->setFormClose();
+                $this->load();
+            break;            
         }
+        
+
     } 
 
    /**
@@ -96,16 +108,6 @@ class LwUser extends CrudComponent
     {
         $srv               = new UserRoleService();
         $this->selectRoles = $srv->getRoleSelectArray();
-    }  
-    
-   /**
-     * Adiciona nova Role
-     * @author Silvio Watakabe <silvio@tcmed.com.br>
-     * @version 1.0
-     */       
-    public function addRole($role)
-    {
-
-    }     
+    }    
 
 }

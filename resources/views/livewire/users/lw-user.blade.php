@@ -1,4 +1,5 @@
 @php
+  // Seta a posição dos botões de ação: inicio = start e fim = null
   $acao = null;
 @endphp
 
@@ -16,10 +17,11 @@
 
         @foreach($users as $user)  
           @php
+            // Botões de ação personalizados
             $lambda  = $this->buildActBtn('Editar', "edit({$user->id})", 'edit');
             $lambda .= $this->buildActBtn('Excluir', "delete({$user->id})", 'trash');
-
-            $strRoles = $this->buildBtn('', 'new("Role")');
+            // Seta botão adiciona as roles já incluidas no usuário
+            $strRoles = $this->buildBtn('', 'new("Role",' . $user->id . ')');
             $i = 0;
             foreach($user->roles as $role) {
               $strRoles .= $i < 1 ? $role->name : ' - ' . $role->name;
