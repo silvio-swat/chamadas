@@ -1,5 +1,5 @@
 <!-------------------------------   HTML do modal Form ---------------------------->
-@modal_form_ini(['formName' => 'User', 'cols' => 2, 'spaces' => 4, 'w' => 'w-11/12','modalForm' => $modalForm, 
+@modal_form_ini(['formType' => 'User', 'cols' => 2, 'spaces' => 4, 'w' => 'w-11/12','modalForm' => $modalForm, 
 'formTitle' => $formTitle, 'model' => $model, $model => $$model])@endmodal_form_ini
     
     @input_text(['label' => 'Nome(*)', 'modelField' => 'userModel.name',

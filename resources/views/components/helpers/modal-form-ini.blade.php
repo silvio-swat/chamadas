@@ -1,7 +1,7 @@
 <!-------------------------------   HTML do modal para testar o Alpine ---------------------------->
 <!-- onclick="openModal(true)" -->
 
-<div x-data="{ isOpen: {{ $modalForm == $formName ? 'true' : 'false' }}  }">
+<div x-data="{ isOpen: {{ $modalForm == $formType ? 'true' : 'false' }}  }">
   
   <!-- overlay transition-opacity transition-transform  -->
   <div 
@@ -31,7 +31,7 @@
     
         <!-- body -->
         <div class="modal--body">
-          <form class="modal--form-class" wire:submit.prevent="{{$method ?? 'submit'}}({{$$model}}, '{{$formName}}')">
+          <form class="modal--form-class" wire:submit.prevent="{{$method ?? 'submit'}}({{$$model}}, '{{$formType}}')">
             @csrf
             <div class="overflow-hidden">
               <div class="grid grid-cols-{{ $cols ?? 1 }} gap-{{ $spaces ?? 4 }}">
