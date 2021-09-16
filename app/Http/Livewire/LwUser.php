@@ -6,7 +6,9 @@ use App\Http\Requests\UserRequest;
 use App\Models\Role;
 use App\Models\User;
 use App\Services\UserRoleService;
+use Exception;
 use Illuminate\Support\Facades\Hash;
+use PhpParser\Node\Stmt\TryCatch;
 
 class LwUser extends CrudComponent
 {
@@ -49,7 +51,7 @@ class LwUser extends CrudComponent
                 $this->model = 'roleModel';
                 $this->formTitle = "Adicionar Papel";
                 $this->roleModel = parent::new($type);
-                $this->userModel = User::find($id);          
+                $this->userModel = User::find($id);       
             break;            
         }
     }     
@@ -90,14 +92,34 @@ class LwUser extends CrudComponent
             break;
             case 'Role':
                 $this->roleModel = Role::find($this->roleId);
-                $this->userModel->attachRole($this->roleModel);
+                // adiciona a Role no Usuário
+                $this->insertRole();
                 $this->setFormClose();
+                $this->type = 'User';
                 $this->load();
             break;            
         }
-        
-
     } 
+
+   /**
+     * Adiciona novo papel ao usuário
+     * @author Silvio Watakabe <silvio@tcmed.com.br>
+     * @version 1.0
+     */       
+    public function insertRole()
+    {
+        $error = false;
+        try {
+            $this->userModel->attachRole($this->roleModel);
+        } catch(Exception $e) {
+            $error = true;
+        }
+        if(!$error){
+            $this->alert('success', 'Papel adicionado com sucesso!');
+        } else {
+            $this->alert('error', "Papel selecionado já foi adicionado!");
+        }
+    }      
 
    /**
      * Carrega Selects
@@ -108,6 +130,42 @@ class LwUser extends CrudComponent
     {
         $srv               = new UserRoleService();
         $this->selectRoles = $srv->getRoleSelectArray();
-    }    
+    }   
+    
+    /**
+     * Armazeona o id para executar exclusão caso confirmado
+     *
+     * @return response()
+     */
+    public function delete($id, $type)
+    {
+        $this->type         = $type;
+        switch($type) {
+            case 'User':
+                parent::delete($id, $type);
+            break;
+            case 'Role':
+                $this->userModel = User::find($id['pivot']['user_id']);
+                $this->roleModel = Role::find($id['pivot']['role_id']);
+                $this->modalDelete  = "true";
+            break;        
+        }        
+    }     
+
+    public function deleteConfirm()
+    {
+        switch($this->type) {
+            case 'User':
+                parent::deleteConfirm();
+            break;
+            case 'Role':
+                $this->userModel->detachRole($this->roleModel);
+                $this->type = 'User';
+                $this->load();
+                $this->modalDeleteClose(); 
+                $this->alert('success', 'Excluído com sucesso');                
+            break;        
+        }
+    }         
 
 }
