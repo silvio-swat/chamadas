@@ -71,6 +71,7 @@ class CrudComponent extends Component
         $classname             = $this->classNSpace . $type;
         $newClass              = new $classname();  
         $this->formTitle       = "Editar";
+  
         $this->setFormOpen();
         
         return $newClass::find($key);

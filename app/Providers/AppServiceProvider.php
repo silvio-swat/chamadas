@@ -41,5 +41,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::aliasComponent('components.helpers.thead'         , 'render_thead');
         Blade::aliasComponent('components.helpers.tbody'         , 'render_tbody');
         Blade::aliasComponent('components.helpers.page-title'    , 'page_title');
+        Blade::aliasComponent('components.helpers.content-open'  , 'content_open');
+        Blade::aliasComponent('components.helpers.content-close' , 'content_close');
     }
 }

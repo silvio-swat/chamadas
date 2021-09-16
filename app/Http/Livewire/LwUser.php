@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Services\UserRoleService;
 use Exception;
 use Illuminate\Support\Facades\Hash;
-use PhpParser\Node\Stmt\TryCatch;
+
 
 class LwUser extends CrudComponent
 {
@@ -17,7 +17,6 @@ class LwUser extends CrudComponent
     public Role $roleModel;
     public $password_confirmation;
     public $password;
-    public $roleId;
     public $selectRoles = []; 
     public $strRoles; 
 
@@ -27,6 +26,7 @@ class LwUser extends CrudComponent
     }
 
     public function mount() {
+        $this->roleModel = new Role();
         $this->type = 'User';
         $this->load();
         $this->loadSelects();
@@ -59,7 +59,7 @@ class LwUser extends CrudComponent
     public function edit($key, $type)
     {
         $this->userModel = parent::edit($key, $type);
-        $this->formTitle = "Editação de Usuario{$this->userModel->name}";
+        $this->formTitle = "Editação de Usuario {$this->userModel->name}";
     } 
     
     // Seta regras de formulario conforme lista e form new ou edit clicados por conseguinte
@@ -87,11 +87,11 @@ class LwUser extends CrudComponent
                 $isNewUser = !isset($data['userModel']['id']) ? true : false ;
                 $user = parent::submit($data['userModel'], $type);
                 if(!empty($user) and $isNewUser) {
-                    $user->attachRole($data['roleId']);
+                    $user->attachRole($data['roleModel']['id']);
                 }             
             break;
             case 'Role':
-                $this->roleModel = Role::find($this->roleId);
+                $this->roleModel = Role::find($model['id']);
                 // adiciona a Role no Usuário
                 $this->insertRole();
                 $this->setFormClose();
