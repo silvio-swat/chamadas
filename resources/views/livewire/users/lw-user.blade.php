@@ -18,13 +18,16 @@
         @foreach($users as $user)  
           @php
             // Botões de ação personalizados
-            $lambda  = $this->buildActBtn('Editar', "edit({$user->id})", 'edit');
-            $lambda .= $this->buildActBtn('Excluir', "delete({$user->id})", 'trash');
-            // Seta botão adiciona as roles já incluidas no usuário
+            $lambda  = $this->buildActBtn('Editar', 'edit(' . $user->id . ', "User")', 'edit');
+            $lambda .= $this->buildActBtn('Excluir', 'delete(' . $user->id . ', "User")', 'trash');
+            // Seta botão adiciona novas roles no usuário
             $strRoles = $this->buildBtn('', 'new("Role",' . $user->id . ')');
             $i = 0;
-            foreach($user->roles as $role) {
-              $strRoles .= $i < 1 ? $role->name : ' - ' . $role->name;
+            // Busca todas os papeis para exibir na coluna
+            foreach($user->roles ?? [] as $role) {
+              $btnDelRole = $this->buildActBtn('', 'delete(' . $role . ', "Role")', 'trash');
+              $strRoles .= $i < 1 ? $role->name : '<br />' . $role->name;
+              $strRoles .= $btnDelRole;
               $i++;
             }
           @endphp
@@ -41,6 +44,7 @@
       
       @include('livewire.users.form-modal')
       @include('livewire.users.form-role-modal')
+      @include('layouts.delete-modal')      
   </div>
 </div>    
   
