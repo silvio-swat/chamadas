@@ -27,8 +27,8 @@ class UserRequest extends FormRequest
             'userModel.name'                  => 'required|string|max:255',
             'userModel.email'                 => 'required|string|email|max:255|unique:users,email',
             'password'                        => 'required|string|min:8|confirmed',
-            'roleId'                          => 'required',
-            'userModel.is_admin'              => ''
+            'userModel.is_admin'              => '',
+            'roleModel.id'                    => 'required'
         ];
     }
 
