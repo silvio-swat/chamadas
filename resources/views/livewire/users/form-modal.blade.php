@@ -17,10 +17,12 @@
     @input_password(['label' => 'Repita a senha(*)', 'modelField' => 'password_confirmation',
       'placeHolder' => 'Repita a senha'])@endinput_password()
 
-    @if(!isset($userModel->id))
+      @php
+        $render = isset($userModel->id) ? 'false' : 'true';
+      @endphp    
       @input_select($roleSel = ['label' => 'Papel(*)', 'modelField' => 'roleModel.id',
-      'selectItems' => $selectRoles, 'render' => true])@endinput_select()
-    @endif
+        'selectItems' => $selectRoles, 'render' => $render])@endinput_select()
+
     @input_box(['label' => 'IsAdmin', 'modelField' => 'userModel.is_admin'])@endinput_box()  
     
 @modal_form_fim(['saveLabel' => 'Salvar Usuário'])@endmodal_form_fim()

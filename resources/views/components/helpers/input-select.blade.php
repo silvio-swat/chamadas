@@ -1,6 +1,5 @@
-@if(isset($render) and $render)
-  <div class="modal--form-input-div-1">                
-    <div class="modal--form-input-div-2">
+  <div class="modal--form-input-div-1" x-data="{ isOpen: {{ $render ?? 'true' }} }">                
+    <div class="modal--form-input-div-2" x-show="isOpen">
       <label class="modal--form-label" for="grid-state">
         {{ $label }}
       </label>
@@ -18,4 +17,3 @@
       </div>
     </div>
   </div> 
-@endif

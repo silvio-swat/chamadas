@@ -45,6 +45,7 @@ class LwUser extends CrudComponent
             case 'User':
                 $this->model = 'userModel';
                 $this->formTitle = "Criar novo Usuário";
+                $this->clearPassword();
                 $this->userModel = parent::new($type);                
             break;
             case 'Role':
@@ -58,6 +59,7 @@ class LwUser extends CrudComponent
     
     public function edit($key, $type)
     {
+        $this->clearPassword();
         $this->userModel = parent::edit($key, $type);
         $this->formTitle = "Editação de Usuario {$this->userModel->name}";
     } 
@@ -82,12 +84,13 @@ class LwUser extends CrudComponent
     {
         switch($this->type) {
             case 'User':
-                $data                           = $this->validate();
-                $data['userModel']['password']  = Hash::make($data['password']);
-                $isNewUser = !isset($data['userModel']['id']) ? true : false ;
-                $user = parent::submit($data['userModel'], $type);
+                if($this->password) {
+                    $model['password']  = Hash::make($this->password);
+                }
+                $isNewUser = !isset($model['id']) ? true : false ;
+                $user = parent::submit($model, $type);
                 if(!empty($user) and $isNewUser) {
-                    $user->attachRole($data['roleModel']['id']);
+                    $user->attachRole($this->roleModel->id);
                 }             
             break;
             case 'Role':
@@ -166,6 +169,12 @@ class LwUser extends CrudComponent
                 $this->alert('success', 'Excluído com sucesso');                
             break;        
         }
-    }         
+    }  
+    
+    public function clearPassword()
+    {
+        $this->password = null;
+        $this->password_confirmation = null;
+    }     
 
 }

@@ -85,14 +85,16 @@ class CrudComponent extends Component
      */       
     public function submit($model, $type)
     {
-        $this->validate();
+   
         $classname  = $this->classNSpace . $type;
         $class      = new $classname();
         $savedClass = null;
         
         if(isset($model['id'])) {
+            $this->validateOnly($model);
             $savedClass = $class->find($model['id'])->update($model);
         } else {
+            $this->validate();
             $savedClass = $class->create($model);        
         }
 
