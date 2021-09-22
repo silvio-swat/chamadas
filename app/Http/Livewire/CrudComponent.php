@@ -4,11 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Services\Helpers\ParametrosService;
 use App\Services\Helpers\ViewHelperService;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class CrudComponent extends Component
 {
-    protected $param;
+    public    $user;
+    public    $permiComp;
     public    $modalDelete         = 'false';
     public    $formTitle;
     public    $deleteId;
@@ -17,20 +19,33 @@ class CrudComponent extends Component
     public    $modalForm           = null;
     public    $modalList           = null;
     public    $header              = null;
-    protected $rules               = [];
-    protected $messages            = []; 
     public    $models              = [];  
     public    $model;
-    protected $viewHelper;
     public    $lambda;
     public    $acao;
+    protected $param;
+    protected $rules               = [];
+    protected $messages            = []; 
+    protected $viewHelper;
 
-    public function __construct()
-    {
+
+    public function mount()
+    {       
         $this->classNSpace = "App\\Models\\";
-        $this->param = new ParametrosService();
-        $this->viewHelper = new ViewHelperService();
-    }
+        $this->param       = $this->getParametrosService();
+        $this->viewHelper  = $this->getViewHelper();
+        $this->user        = Auth::user();      
+    }  
+
+    public function getViewHelper()
+    {       
+        return new ViewHelperService();    
+    }  
+    
+    public function getParametrosService()
+    {       
+        return new ParametrosService();
+    }      
 
     /**
      * Mensagem de toast
@@ -44,19 +59,30 @@ class CrudComponent extends Component
                 ['type' => $type,  'message' => $msg]);
     } 
 
-    protected function load()
+    protected function index()
     {
         $classname            = $this->classNSpace . $this->type;
-        $newClass             = new $classname();        
-        return $newClass::all();
-    }      
+        $newClass             = new $classname();
+        if(!$this->user->hasPermission("index-{$this->permiComp}|crud-{$this->permiComp}") 
+            and !$this->user->is_admin) {
+            $this->alert('warning', 'Acesso negado, contate o administrador');
+            return [];
+        } else {
+            return $newClass::all();
+        }     
+    }  
 
     /**
      * Instantiate a new UserController instance.
      */
     public function new($type = null)
     {   
-        $this->type = $type ? $type : $this->type;
+        if(!$this->user->hasPermission("new-{$this->permiComp}|crud-{$this->permiComp}") 
+            and !$this->user->is_admin) {
+            abort(403, "Acesso negado, contate o administrador");
+        }    
+
+        $this->type           = $type ? $type : $this->type;
         $this->formTitle      = "Novo";
         $classname            = $this->classNSpace . $this->type;
         $newClass             = new $classname();     
@@ -67,6 +93,10 @@ class CrudComponent extends Component
     
     public function edit($key, $type)
     {
+        if(!$this->user->hasPermission("edit-{$this->permiComp}|crud-{$this->permiComp}") 
+            and !$this->user->is_admin) {
+            abort(403, "Acesso negado, contate o administrador");
+        }        
         $this->type = $type;
         $classname             = $this->classNSpace . $type;
         $newClass              = new $classname();  
@@ -84,22 +114,20 @@ class CrudComponent extends Component
      * @param model $model
      */       
     public function submit($model, $type)
-    {
-   
+    {        
+        $this->validate();
         $classname  = $this->classNSpace . $type;
         $class      = new $classname();
         $savedClass = null;
         
         if(isset($model['id'])) {
-            $this->validateOnly($model);
             $savedClass = $class->find($model['id'])->update($model);
         } else {
-            $this->validate();
             $savedClass = $class->create($model);        
         }
 
         $this->setFormClose();
-        $this->load();
+        $this->index();
         $this->alert('success', 'Salvo com sucesso');
 
         return $savedClass;
@@ -153,6 +181,10 @@ class CrudComponent extends Component
      */
     public function delete($id, $type)
     {
+        if(!$this->user->hasPermission("delete-{$this->permiComp}|crud-{$this->permiComp}") 
+            and !$this->user->is_admin) {
+            abort(403, "Acesso negado, contate o administrador");
+        }          
         $this->type         = $type;
         $this->deleteId     = $id;
         $this->modalDelete  = "true";
@@ -164,7 +196,7 @@ class CrudComponent extends Component
         $newClass              = new $classname();
         $newClass::find($this->deleteId)->delete();
 
-        $this->load();
+        $this->index();
         $this->modalDeleteClose(); 
         $this->alert('success', 'Excluído com sucesso');
     }      
@@ -183,14 +215,15 @@ class CrudComponent extends Component
     
     public function buildBtn($label = 'New', $mt = 'new()', $icon = 'plus'){
 
-        $button = $this->viewHelper->buildButton($label, $mt, $icon);
+        $button = $this->getViewHelper()->buildButton($label, $mt, $icon);
 
         return $button;
     }    
 
     public function buildActBtn($label = 'New', $mt = 'new()', $icon = 'plus'){
 
-        $button = $this->viewHelper->buildActionButton($label, $mt, $icon);
+
+        $button = $this->getViewHelper()->buildActionButton($label, $mt, $icon);
 
         return $button;
     }        

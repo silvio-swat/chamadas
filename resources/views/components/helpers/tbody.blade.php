@@ -1,6 +1,6 @@
 
     <tr class="modal--table-tr">
-        @if(isset($acao) and $acao = 'start')
+        @if(isset($acao) && $acao == 'start')
             @if(isset($id) and !isset($lambda))
                 <td class="modal--table-td">
                     <button title="Editar" wire:click="edit({{$id}})"><i class="fa fa-edit fa-xl mx-1"></i></button>
@@ -24,7 +24,7 @@
             @endforeach 
         @endIf
         
-        @if(!isset($acao))
+        @if(isset($acao) && $acao == 'end')
             @if(isset($id) and !isset($lambda))
                 <td class="modal--table-td">
                     <button title="Editar" wire:click="edit({{$id}})"><i class="fa fa-edit fa-xl mx-1"></i></button>

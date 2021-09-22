@@ -25,8 +25,10 @@ class UserRole extends CrudComponent
      */
     public function mount()
     {
+        parent::mount(); 
+        $this->permiComp       = "user-roles";                 
         $this->type = 'Role';
-        $this->load();
+        $this->index();
     }   
 
     public function render()
@@ -46,9 +48,9 @@ class UserRole extends CrudComponent
         $this->formTitle = "Editação de Papel de {$this->roleModel->name}";
     }
     
-    public function load()
+    public function index()
     {
-        $this->roles = parent::load();
+        $this->roles = parent:: index();
     }  
 
 }

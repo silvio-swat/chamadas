@@ -63,7 +63,7 @@
     }     
 
     .modal--table-td{
-        @apply  px-4 py-2 whitespace-nowrap ;        
+        @apply  px-4 py-2;        
     }  
     .modal--table-div{
         @apply  shadow overflow-hidden border-b border-gray-200 sm:rounded-lg my-3;        

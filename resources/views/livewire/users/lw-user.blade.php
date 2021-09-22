@@ -1,6 +1,6 @@
 @php
   // Seta a posição dos botões de ação: inicio = start e fim = null
-  $acao = null;
+  $acao = 'end';
 @endphp
 
 <div>

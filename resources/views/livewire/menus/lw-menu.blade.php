@@ -29,16 +29,19 @@
 {{-- Exibe as tabs de cada página cadastrada --}}
       <div x-data="{ openTab: {{isset($menuPages[0]) ? $menuPages[0]->id : 1}} }" class="p-6">
         <ul class="flex border-b">
-          @foreach($menuPages as $menuPage)        
-            <li @click="openTab = {{$menuPage->id}}" :class="{ '-mb-px': openTab === {{$menuPage->id}} }" class="-mb-px mr-1">
-              <a :class="openTab === {{$menuPage->id}} ? 'border-l border-t border-r rounded-t text-blue-700' : 'text-blue-500 hover:text-blue-800'" class="bg-white inline-block py-2 px-4 font-semibold" href="#">
-                <i class="{{$menuPage->icon}}"></i> {{$menuPage->name}}
-              </a>  
-            </li>
+          @foreach($menuPages as $menuPage) 
+            @if($user->isAbleTo($menuPage->permission->name) || $user->is_admin)       
+              <li @click="openTab = {{$menuPage->id}}" :class="{ '-mb-px': openTab === {{$menuPage->id}} }" class="-mb-px mr-1">
+                <a :class="openTab === {{$menuPage->id}} ? 'border-l border-t border-r rounded-t text-blue-700' : 'text-blue-500 hover:text-blue-800'" class="bg-white inline-block py-2 px-4 font-semibold" href="#">
+                  <i class="{{$menuPage->icon}}"></i> {{$menuPage->name}}
+                </a>  
+              </li>
+            @endif
           @endforeach  
         </ul>
         <div class="w-full pt-4">
-          @foreach($menuPages as $menuPage)        
+          @foreach($menuPages as $menuPage)
+          @if($user->isAbleTo($menuPage->permission->name) || $user->is_admin)         
             <div x-show="openTab === {{$menuPage->id}}" x-cloak>
 
               <div class="py-2">
@@ -82,6 +85,7 @@
                 </div>
               </div>
             </div>
+            @endif
           @endforeach
         </div>
       </div>

@@ -38,8 +38,10 @@ class LwMenu extends CrudComponent
      */  
     public function mount()
     {
+        parent::mount(); 
+        $this->permiComp = "menus";               
         $this->classNSpace = "App\\Models\\";
-        $this->load();
+        $this->index();
         $this->loadPemissionsSelect();          
         $this->menuPageModel = new MenuPage();
         $this->menuModel     = new Menu();
@@ -100,16 +102,16 @@ class LwMenu extends CrudComponent
         $this->setListClose();
         switch($type){
             case 'MenuPage':
-                $this->menuPageModel = MenuPage::find($id);
+                $this->menuPageModel = parent::edit($id, $type);
                 $this->formTitle     = "Edição da Página {$this->menuPageModel->name}";
             break;
             case 'Menu':
-                $this->menuModel = Menu::find($id);
+                $this->menuModel = parent::edit($id, $type);
                 $this->formTitle = "Edição de Menu de {$this->menuModel->name}
                 da página {$this->menuModel->menuPage->name}";
             break;
             case 'SubMenu':
-                $this->subMenuModel = SubMenu::find($id);
+                $this->subMenuModel = parent::edit($id, $type);
                 $this->formTitle    = "Edição de {$this->subMenuModel->name}
                 do menu {$this->subMenuModel->menu->name} da página 
                 {$this->subMenuModel->menu->menuPage->name}";
@@ -123,7 +125,7 @@ class LwMenu extends CrudComponent
      * @author Silvio Watakabe <silvio@tcmed.com.br>
      * @version 1.0
      */      
-    public function load() {
+    public function index() {
         //Carrega dados de Páginas de Menu
         $this->menuPages = MenuPage::orderBy('order', 'ASC')->get();
         // Se existir id carrega dados de menu conforme página clicada
@@ -172,7 +174,7 @@ class LwMenu extends CrudComponent
             break;                                
         }
         $this->modalList = $type;        
-        $this->load();
+        $this->index();
     }
     
 

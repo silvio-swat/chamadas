@@ -54,6 +54,9 @@
                           Ordem
                         </th>
                         <th scope="col" class="modal--table-th">
+                          Permission
+                        </th>                        
+                        <th scope="col" class="modal--table-th">
                           Icone
                         </th>
                         <th scope="col" class="modal--table-th">
@@ -74,6 +77,9 @@
                           <td class="modal--table-td">
                               <span>{{ $menuPage->order }}</span>
                           </td>    
+                          <td class="modal--table-td">
+                            <span>{{ $menuPage->permission->name }}</span>
+                        </td>                             
                           <td class="modal--table-td">
                             <span><i class="{{ $menuPage->icon  }}"></i> {{ $menuPage->icon }}</span>
                           </td>                                 
