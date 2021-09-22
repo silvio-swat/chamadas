@@ -26,16 +26,18 @@ class LwUser extends CrudComponent
     }
 
     public function mount() {
+        parent::mount();        
+        $this->permiComp = "users";            
         $this->roleModel = new Role();
         $this->type = 'User';
-        $this->load();
+        $this->index();
         $this->loadSelects();
         $this->model = 'userModel';
     }
 
-    public function load()
+    public function index()
     {
-        $this->users = parent::load();
+        $this->users = parent:: index();
     }
     
     public function new($type = null, $id = null)
@@ -67,12 +69,10 @@ class LwUser extends CrudComponent
     // Seta regras de formulario conforme lista e form new ou edit clicados por conseguinte
     protected function rules()
     {
-        $srv = null;
         $srv = new UserRequest();
         $this->messages = $srv->messages();
-        return $srv->rules();
+        return $srv->rules($this->userModel->id ?? null, $this->password);
     }   
-    
 
    /**
      * Salva a model conforme o tipo editado ou criado
@@ -99,7 +99,7 @@ class LwUser extends CrudComponent
                 $this->insertRole();
                 $this->setFormClose();
                 $this->type = 'User';
-                $this->load();
+                $this->index();
             break;            
         }
     } 
@@ -164,7 +164,7 @@ class LwUser extends CrudComponent
             case 'Role':
                 $this->userModel->detachRole($this->roleModel);
                 $this->type = 'User';
-                $this->load();
+                $this->index();
                 $this->modalDeleteClose(); 
                 $this->alert('success', 'Excluído com sucesso');                
             break;        

@@ -20,10 +20,12 @@ class LwParams extends CrudComponent
      * Instantiate a new UserController instance.
      */
     public function mount()
-    {      
+    {
+        parent::mount();
+        $this->permiComp = "params";              
         $this->classNSpace = "App\\Models\\";
         $this->type = 'Param';
-        $this->load();
+        $this->index();
     } 
 
     public function render()
@@ -36,7 +38,7 @@ class LwParams extends CrudComponent
      */
     public function new($type = null)
     {   
-        $this->type = 'Param';
+        $this->type = !$type ? 'Param' : $type;
         $this->paramModel     = parent::new($type);
     }   
     
@@ -89,10 +91,10 @@ class LwParams extends CrudComponent
     } 
     
     // Seta regras de formulario conforme lista e form new ou edit clicados por conseguinte
-    protected function load()
+    protected function index()
     {
         $this->type = 'Param';
-        $this->params         = parent::load();
+        $this->params         = parent:: index();
     }  
     
 }

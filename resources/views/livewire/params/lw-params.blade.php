@@ -63,7 +63,7 @@
                       <td class="modal--table-td">
                         <div class="py-3 ">
                           <button
-                            wire:click="newItem({{ $param->id}}, 'ParamItem')"
+                            wire:click="newItem('ParamItem', {{ $param->id}})"
                             class="relative text-white px-3 w-auto h-10 bg-blue-600 rounded-full hover:bg-blue-700
                             active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
                             <svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" class="w-6 h-6 inline-block">

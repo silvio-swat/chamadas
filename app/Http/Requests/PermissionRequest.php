@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PermissionRequest extends FormRequest
 {
@@ -21,9 +22,9 @@ class PermissionRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules($id)
     {
-        return  [
+        $valArray =  [
             'permissionModel.name'         => 'required|unique:permissions,name,',
             'permissionModel.display_name' => 'required|string|min:4',
             'permissionModel.description'  => '',
@@ -32,6 +33,10 @@ class PermissionRequest extends FormRequest
             'permissionModel.controller'   => '',
             'permissionModel.method'       => '',
         ];
+        if(!empty($id)){
+            $valArray['permissionModel.name'] = ['required', 'string', Rule::unique('permissions', 'name')->ignore($id)];
+        }
+        return  $valArray;
     }
 
      /**

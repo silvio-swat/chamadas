@@ -1,13 +1,13 @@
 <div>
-    <div class="bg-white shadow">
-      <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Permissões de acesso') }}
-        </h2>
-  
-      </div>
+  <div class="bg-white shadow">
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+      
+      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+          {{ __('Permissões de acesso') }}
+      </h2>
+
     </div>
+  </div>
   
   <div class="mx-auto py-2 px-4 sm:px-6 lg:px-8">
     <div class="py-3 ">
@@ -24,83 +24,72 @@
       </button>
     </div>   
   
-      <div class="flex flex-col my-3">
-        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="modal--table-div">
-  
-              <table class="modal--table">
-                <thead class="modal--table-thead">
-                  <tr>
-                    <th scope="col" class="modal--table-th ">
-                        Tipo
-                    </th>                      
-                    <th scope="col" class="modal--table-th">
-                        Nome de Exibição
-                    </th>
-                    <th scope="col" class="modal--table-th">
-                        permissão
-                    </th>
-                    <th scope="col" class="modal--table-th">
-                        Descrição
-                    </th>
-                    <th scope="col" class="modal--table-th">
-                        Menu
-                    </th>
-                    <th scope="col" class="modal--table-th">
-                        Controller
-                    </th>   
-                    <th scope="col" class="modal--table-th">
-                        Action
-                    </th>                                                                                   
-                    <th scope="col" class="modal--table-th">
-                      <span class="sr-only">Editar</span>
-                    </th>
-                    <th scope="col" class="modal--table-th">
-                      <span class="sr-only">Excluir</span>
-                    </th>              
-                  </tr>
-                </thead>
-                <tbody class="modal--table-tbody">
-      
-                  @foreach($permissions as $permission)        
-                    <tr class="modal--table-tr">
-                      <td class="modal--table-td">
-                        <span>{{ $permission->type }}</span>
-                    </td>                      
-                      <td class="modal--table-td">
-                          <span>{{ $permission->display_name }}</span>
-                      </td>
-                      <td class="modal--table-td">
-                          <span>{{ $permission->name }}</span>
-                      </td>     
-                      <td class="modal--table-td">
-                        <span>{{ $permission->descri }}</span>
-                    </td>                        
-                      <td class="modal--table-td">
-                          <span>{{ $permission->menu }}</span>
-                      </td>         
-                      <td class="modal--table-td">
-                          <span>{{ $permission->controller }}</span>
-                      </td>          
-                      <td class="modal--table-td">
-                          <span>{{ $permission->action }}</span>
-                      </td>                                                                      
-                      <td class="modal--table-td">
-                          <button wire:click="edit({{$permission->id}}, 'Permission')"><i class="fa fa-edit fa-xl"></i></button>
-                      </td>  
-                      <td class="modal--table-td">
-                          <button wire:click="delete({{$permission->id}}, 'Permission')"><i class="fa fa-trash fa-xl"></i></button>
-                      </td>                                
-                    </tr>        
-                  @endforeach    
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div> 
-      
+    @table_open() @endtable_open()
+      <thead class="modal--table-thead">
+        <tr>
+          <th scope="col" class="modal--table-th ">
+              Tipo
+          </th>                      
+          <th scope="col" class="modal--table-th">
+              Nome de Exibição
+          </th>
+          <th scope="col" class="modal--table-th">
+              permissão
+          </th>
+          <th scope="col" class="modal--table-th">
+              Descrição
+          </th>
+          <th scope="col" class="modal--table-th">
+              Menu
+          </th>
+          <th scope="col" class="modal--table-th">
+              Controller
+          </th>   
+          <th scope="col" class="modal--table-th">
+              Action
+          </th>                                                                                   
+          <th scope="col" class="modal--table-th">
+            <span class="sr-only">Editar</span>
+          </th>
+          <th scope="col" class="modal--table-th">
+            <span class="sr-only">Excluir</span>
+          </th>              
+        </tr>
+      </thead>
+      <tbody class="modal--table-tbody">
+        @foreach($permissions as $permission)        
+          <tr class="modal--table-tr">
+            <td class="modal--table-td">
+              <span>{{ $permission->type }}</span>
+          </td>                      
+            <td class="modal--table-td">
+                <span>{{ $permission->display_name }}</span>
+            </td>
+            <td class="modal--table-td">
+                <span>{{ $permission->name }}</span>
+            </td>     
+            <td class="modal--table-td">
+              <span>{{ $permission->description }}</span>
+          </td>                        
+            <td class="modal--table-td">
+                <span>{{ $permission->menu }}</span>
+            </td>         
+            <td class="modal--table-td">
+                <span>{{ $permission->controller }}</span>
+            </td>          
+            <td class="modal--table-td">
+                <span>{{ $permission->method }}</span>
+            </td>                                                                      
+            <td class="modal--table-td">
+                <button wire:click="edit({{$permission->id}}, 'Permission')"><i class="fa fa-edit fa-xl"></i></button>
+            </td>  
+            <td class="modal--table-td">
+                <button wire:click="delete({{$permission->id}}, 'Permission')"><i class="fa fa-trash fa-xl"></i></button>
+            </td>                                
+          </tr>        
+        @endforeach    
+      </tbody>
+        @table_close() @endtable_close()
       @include('livewire.permissions.form-modal')
       @include('layouts.delete-modal')
 

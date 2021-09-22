@@ -8,7 +8,8 @@ use App\Services\PermissionService;
 
 class LwPermissions extends CrudComponent
 {
-    public   $header = "Permissões de acesso de recursos do sistema";
+    public   $gate;
+    public   $header = "Permissões de acesso a recursos do sistema";
     public   $permissions       = [];
     public   $selectTipos       = [];
     public   $selectMenus       = [];
@@ -22,11 +23,13 @@ class LwPermissions extends CrudComponent
      */
     public function mount()
     {
+        parent::mount();
+        $this->permiComp = "permissions";
         $this->classNSpace = "App\\Models\\";
         $this->loadSelects();
         $this->permissionModel = new Permission();
         $this->type = 'Permission';
-        $this->load();
+        $this->index();
     }       
 
     public function render()
@@ -53,7 +56,7 @@ class LwPermissions extends CrudComponent
     public function submit($model, $type)
     {   
         // Preenche o name acl aplicavel
-        $this->permissionModel->name = $this->permissionModel->type . ":" .
+        $this->permissionModel->name = $this->permissionModel->type . "-" .
             $this->permissionModel->controller . $this->permissionModel->menu;
         $model['name'] = $this->permissionModel->name;
 
@@ -63,21 +66,23 @@ class LwPermissions extends CrudComponent
             $this->selectTipos, $this->selectMenus, $this->selectControllers);
         $model['display_name'] = $this->permissionModel->display_name;
         // Valida os campos menu e controller
-        if($model['type'] == 'menu' && !$model['menu'] ){
-            $this->alert('error', 'Selecione um Menu');  
+        if(isset($model['type']) && $model['type'] == 'menu' && !$model['menu'] ){
+            $this->alert('error', 'Selecione um Menu');
+            return;  
         }
-        if($model['type'] != 'menu' && !$model['controller'] ){
+        if(isset($model['type']) && $model['type'] != 'menu' && !$model['controller'] ){
             $this->alert('error', 'Selecione um Controller ou Menu');  
+            return;
         }        
 
         parent::submit($model, $type);
-        $this->load();
+        $this->index();
     } 
     
     // Seta regras de formulario conforme lista e form new ou edit clicados por conseguinte
-    protected function load()
+    protected function index()
     {
-        $this->permissions         = parent::load();
+        $this->permissions         = parent:: index();
     }   
 
     public function loadSelects()
@@ -92,7 +97,7 @@ class LwPermissions extends CrudComponent
     {
         $srv = new PermissionRequest();
         $this->messages = $srv->messages();
-        return $srv->rules();
+        return $srv->rules($this->permissionModel->id ?? null);
     }     
 
 }
