@@ -5,21 +5,23 @@ namespace App\Http\Livewire;
 use App\Http\Requests\PermissionRequest;
 use App\Models\Permission;
 use App\Services\PermissionService;
+use Livewire\WithPagination;
 
 class LwPermissions extends CrudComponent
 {
+    use withPagination;
     public   $gate;
     public   $header = "Permissões de acesso a recursos do sistema";
-    public   $permissions       = [];
+    // public   $permissions       = [];
     public   $selectTipos       = [];
     public   $selectMenus       = [];
     public   $selectControllers = [];
     public   Permission $permissionModel;
-
-    public $search = null;
+    public   $searchTerm = '';
+    public   $search = null;
 
     /**
-     * Instantiate a new UserController instance.
+     * funciona como o constructt.
      */
     public function mount()
     {
@@ -34,7 +36,8 @@ class LwPermissions extends CrudComponent
 
     public function render()
     {
-        return view('livewire.permissions.lw-permissions');
+        $permissions = Permission::search($this->searchTerm)->paginate(10);
+        return view('livewire.permissions.lw-permissions', ['permissions' => $permissions]);
     }
 
     /**
@@ -98,6 +101,7 @@ class LwPermissions extends CrudComponent
         $srv = new PermissionRequest();
         $this->messages = $srv->messages();
         return $srv->rules($this->permissionModel->id ?? null);
-    }     
+    } 
+    
 
 }

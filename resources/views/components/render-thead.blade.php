@@ -1,19 +1,19 @@
 <thead class="modal--table-thead">
-    <tr>
-        @if(isset($acao) and $acao == 'start')
-            <th scope="col" class="modal--table-th">
+    <tr class={{$trClass}}>
+        @if($acao == 'start')
+            <th scope="col" class="{{$thClass}}">
                 <span>Ação</span>
-            </th>
+            </th>  
         @endIf           
         @foreach ($items as $item => $val)
-            <th scope="col" class="modal--table-th">
+            <th scope="col" class="{{$thClass}}">
                 {{ $val }}
             </th>
         @endforeach
-        @if(!isset($acao) or $acao == 'end')
-            <th scope="col" class="modal--table-th">
+        @if($acao == 'end')
+            <th scope="col" class="{{$thClass}}">
                 <span>Ação</span>
-            </th>  
+            </th>
         @endIf          
     </tr>
 </thead>

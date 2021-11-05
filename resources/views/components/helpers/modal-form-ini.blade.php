@@ -31,7 +31,7 @@
     
         <!-- body -->
         <div class="modal--body">
-          <form class="modal--form-class" wire:submit.prevent="{{$method ?? 'submit'}}({{$$model}}, '{{$formType}}')">
+          <form class="modal--form-class" wire:submit.prevent="{{$method ?? 'submit'}}({{$$model}}, '{{$formType}}')" autocomplete="off">
             @csrf
             <div class="overflow-hidden">
               <div class="grid grid-cols-{{ $cols ?? 1 }} gap-{{ $spaces ?? 4 }}">

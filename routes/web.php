@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AutocompleteController;
 use App\Http\Livewire\LwMenu;
 use App\Http\Livewire\LwParams;
 use App\Http\Livewire\LwPermissions;
@@ -33,7 +34,10 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/params'     , LwParams::class);    
     Route::get('/permissions', LwPermissions::class);    
     Route::get('/roles-permissions', LwRolesPermissions::class);    
-    Route::get('/users-permissions', LwUsersPermissions::class);    
+    Route::get('/users-permissions', LwUsersPermissions::class); 
+
+    Route::post('/autocomplete/user', [AutocompleteController::class, 'user'])->name('user-autocomplete');   
+    Route::post('/autocomplete/permission', [AutocompleteController::class, 'permission'])->name('permission-autocomplete');   
 });
 
 require __DIR__.'/auth.php';

@@ -134,7 +134,7 @@ class LwMenu extends CrudComponent
             $this->menus = $menuPageM->menus->sortBy(
                 function($menu) {
                 return $menu->order;
-            });           
+            });
         } 
         // Se existir id carrega array de SubMenus conforme menu clicado
         if($this->menuId) {
@@ -142,7 +142,7 @@ class LwMenu extends CrudComponent
             $this->subMenus = $menuM->subMenus->sortBy(
                 function($subMenu) {
                 return $subMenu->order;
-            });           
+            });
         } 
     }
     

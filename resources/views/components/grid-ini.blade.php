@@ -1,0 +1,1 @@
+<div class="grid grid-cols-{{ $cols }} gap-{{ $spaces }}">

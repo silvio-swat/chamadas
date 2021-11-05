@@ -8,36 +8,44 @@ use App\Models\User;
 use App\Services\UserRoleService;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+use Livewire\WithPagination;
 
 
 class LwUser extends CrudComponent
 {
-    public $users = [];
+    use WithPagination;
+    // public $users      = [];
     public User $userModel;
     public Role $roleModel;
     public $password_confirmation;
     public $password;
     public $selectRoles = []; 
     public $strRoles; 
+    public $userId = ''; 
+    
+    public $queryUsers = [];
+    public $searchTerm = '';
+    public $searchUserEmail = '';    
 
     public function render()
     {
-        return view('livewire.users.lw-user');
+        $users = User::search($this->searchTerm)->paginate(5);
+        return view('livewire.users.lw-user', ['users' => $users]);
     }
 
     public function mount() {
         parent::mount();        
         $this->permiComp = "users";            
         $this->roleModel = new Role();
-        $this->type = 'User';
+        $this->type      = 'User';
         $this->index();
         $this->loadSelects();
-        $this->model = 'userModel';
+        $this->model     = 'userModel';
     }
 
     public function index()
     {
-        $this->users = parent:: index();
+        $this->users = parent::index();
     }
     
     public function new($type = null, $id = null)
@@ -48,7 +56,7 @@ class LwUser extends CrudComponent
                 $this->model = 'userModel';
                 $this->formTitle = "Criar novo Usuário";
                 $this->clearPassword();
-                $this->userModel = parent::new($type);                
+                $this->userModel = parent::new($type);
             break;
             case 'Role':
                 $this->model = 'roleModel';
@@ -175,6 +183,33 @@ class LwUser extends CrudComponent
     {
         $this->password = null;
         $this->password_confirmation = null;
-    }     
+    }   
+    
+    public function selectUser($user) {
+        $this->searchUserEmail = $user['email'];
+        $this->queryUsers      = [];
+        $this->searchTerm      = null;
+    }
+
+    public function updatedSearchTerm()
+    {
+        $userQuery = User::query();
+
+        $this->queryUsers = $userQuery->where(function ($query) {
+            $query->where('name', 'like', trim($this->searchTerm) . "%")
+                ->orWhere('email', 'like', trim($this->searchTerm) . "%");
+        })->get();
+    }
+  
+
+    public function searchUserClear($list = null)
+    {
+        $this->queryUsers      = [];
+        $this->searchTerm      = null;
+        $this->searchUserEmail = null;
+        if($list == 'listAll') {
+            $this->index();
+        }
+    }    
 
 }
