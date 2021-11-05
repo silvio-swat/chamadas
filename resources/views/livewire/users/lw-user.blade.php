@@ -4,16 +4,24 @@
 @endphp
 
 <div>
-  @page_title(['pageTitle' => 'Usuário']) @endpage_title()
-  @content_open() @endcontent_open()
-    @button(['method' => "new('User')",'label' => 'Novo Usuário', 'icon' => 'plus'])@endbutton()
-              
-    @table_open() @endtable_open()
-      @render_thead(['items' => [
-        'Usuário',
-        'Email',
-        'Papel'
-      ], 'acao' => $acao]) @endrender_thead()
+  <x-page-title pageTitle="Usuários" wire:click="searchUserClear()"/>
+  <x-content acao="open"/>
+    <x-grid cols=3 spaces=4 class="justify-center" />
+      <div>
+        <x-grid cols=2 spaces=1 class="justify-center"/>
+          <x-sis-button method="new('User')" label="Novo Usuário"/>
+          <x-sis-button method="searchUserClear('listAll')" icon="times" label="Limpar pesquisa" class="red--button"/>
+        <x-grid acao="close"/>
+      </div>
+      {{-- @livewire('user-autocomp') --}}
+      {{-- @include('search-users', ['autoComp' => false, 'fieldName' => 'searchTerm'])       --}}
+      <x-sis-input label="Search" modelField='searchTerm' placeHolder='Digite uma busca' label='Search'/>      
+      <div>
+      </div>       
+    <x-grid acao='close' />
+      
+    <x-table />
+      <x-render-thead :items="['Usuário', 'Email', 'Papel']" :acao="$acao" />
 
       @foreach($users as $user)  
         @php
@@ -21,7 +29,8 @@
           $lambda  = $this->buildActBtn('Editar', 'edit(' . $user->id . ', "User")', 'edit');
           $lambda .= $this->buildActBtn('Excluir', 'delete(' . $user->id . ', "User")', 'trash');
           // Seta botão adiciona novas roles no usuário
-          $strRoles = $this->buildBtn('', 'new("Role",' . $user->id . ')');
+          // $strRoles = $this->buildBtn('', 'new("Role",' . $user->id . ')');
+          $strRoles = $this->buildActBtn('Novo Papel', 'new("Role",' . $user->id . ')') . '<br />';
           $i = 0;
           // Busca todas os papeis para exibir na coluna
           foreach($user->roles ?? [] as $role) {
@@ -32,19 +41,23 @@
           }
         @endphp
 
-        @render_tbody(['items' => [
-          $user->name,
-          $user->email,
-          $strRoles
-        ], 'id' => $user->id, 'lambda' => $lambda,  'acao' => $acao])
-        @endrender_tbody() 
-                  
+        <x-render-tbody 
+          :items="[$user->name,
+                   $user->email,
+                   $strRoles]"
+          :id="$user->id" :lambda="$lambda" :acao="$acao"/>
+
       @endforeach 
-    @table_close() @endtable_close()
+    <x-table acao="close"/>
+
+    <div>
+      {{ $users->links() }}
+    </div>
+
     @include('layouts.delete-modal')
     @include('livewire.users.form-modal')
     @include('livewire.users.form-role-modal')
-  @content_close() @endcontent_close()     
+  <x-content acao="close"/>
 </div>  
 
 

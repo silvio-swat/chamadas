@@ -25,10 +25,11 @@ class UserRequest extends FormRequest
     public function rules($id, $password)
     {
         $valArray =  [
+            'userModel.id'                    => '',
             'userModel.name'                  => 'required|string|max:255',
             'userModel.email'                 => 'required|string|email|max:255|unique:users,email',
-            'password'                        => 'required|string|min:8|confirmed',
             'userModel.is_admin'              => '',
+            'password'                        => 'required|string|min:8|confirmed',
             'roleModel.id'                    => 'required'
         ];
         // Altera as regras de validação em caso de Update
@@ -36,9 +37,9 @@ class UserRequest extends FormRequest
             $valArray['roleModel.id' ]   = '';
             $valArray['userModel.email'] = ['required', 'string', Rule::unique('users', 'email')->ignore($id)];
             if(!empty($password)) {
-                $valArray['password']        = 'string|min:8|confirmed';
+                $valArray['password']    = 'string|min:8|confirmed';
             } else {
-                $valArray['password']        = '';
+                $valArray['password']    = '';
             }
         }
         
