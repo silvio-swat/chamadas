@@ -6,14 +6,17 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "beyondcode/laravel-websockets": "^1.12",
         "doctrine/dbal": "^3.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "guzzlehttp/psr7": "^1.7",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "livewire/livewire": "^2.5",
+        "pusher/pusher-php-server": "^5.0",
         "santigarcor/laratrust": "^6.3",
         "yoeunes/toastr": "^1.2"
     },

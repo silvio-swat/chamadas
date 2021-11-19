@@ -12,6 +12,8 @@ class Permission extends LaratrustPermission
     {
         return empty($query) ? static::query()
             : static::where('name', 'like', '%' . $query . '%')
-                 ->orWhere('display_name', 'like', '%' . $query . '%');
+                 ->orWhere('display_name', 'like', '%' . $query . '%')
+                 ->orWhere('id', '=', $query );
+        
     }        
 }

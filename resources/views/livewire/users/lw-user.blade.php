@@ -10,7 +10,7 @@
       <div>
         <x-grid cols=2 spaces=1 class="justify-center"/>
           <x-sis-button method="new('User')" label="Novo Usuário"/>
-          <x-sis-button method="searchUserClear('listAll')" icon="times" label="Limpar pesquisa" class="red--button"/>
+          {{-- <x-sis-button method="searchUserClear('listAll')" icon="times" label="Limpar pesquisa" class="red--button"/> --}}
         <x-grid acao="close"/>
       </div>
       {{-- @livewire('user-autocomp') --}}
