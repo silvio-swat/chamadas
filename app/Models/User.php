@@ -49,7 +49,12 @@ class User extends Authenticatable
     {
         return empty($query) ? static::query()
             : static::where('name', 'like', '%' . $query . '%')
-                 ->orWhere('email', 'like', '%' . $query . '%')
-                 ->orWhere('id', '=', $query );
+                    ->orWhere('email', 'like', '%' . $query . '%')
+                    ->orWhere('id', '=', $query );
     }    
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }       
 }

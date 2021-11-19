@@ -15,10 +15,10 @@ class AlterTablePermissions extends Migration
     {
         Schema::table('permissions', function (Blueprint $table) {
             $table->string('type')->nullable()->default(null)->after('description');
-            $table->string('menu')->nullable()->default(null)->after('description');;
-            $table->string('controller')->nullable()->default(null)->after('description');;
-            $table->string('method')->nullable()->default(null)->after('description');;
-        });        
+            $table->string('menu')->nullable()->default(null)->after('description');
+            $table->string('controller')->nullable()->default(null)->after('description');
+            $table->string('method')->nullable()->default(null)->after('description');
+        });
     }
 
     /**

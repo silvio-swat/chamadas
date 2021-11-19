@@ -1,5 +1,7 @@
 <?php
 
+use App\Events\MessageSent;
+use App\Events\WebSocketDemoEvent;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AutocompleteController;
 use App\Http\Livewire\LwMenu;
@@ -9,6 +11,8 @@ use App\Http\Livewire\LwRolesPermissions;
 use App\Http\Livewire\LwUser;
 use App\Http\Livewire\LwUsersPermissions;
 use App\Http\Livewire\UserRole;
+use App\Http\Livewire\WebSocketTest;
+use App\Models\Message;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,18 +27,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    // broadcast(new WebSocketDemoEvent('some data'));
+
     return view('welcome');
 });
 
 Route::group(['middleware' => ['auth']], function(){
-    Route::get('/dashboard'  , [DashboardController::class,'index'])->name('dashboard');
-    Route::get('/user-roles' , UserRole::class);
-    Route::get('/users'      , LwUser::class);
-    Route::get('/menus'      , LwMenu::class);
-    Route::get('/params'     , LwParams::class);    
-    Route::get('/permissions', LwPermissions::class);    
+    Route::get('/dashboard'       , [DashboardController::class,'index'])->name('dashboard');
+    Route::get('/user-roles'      , UserRole::class);
+    Route::get('/users'           , LwUser::class);
+    Route::get('/menus'           , LwMenu::class);
+    Route::get('/params'          , LwParams::class);    
+    Route::get('/permissions'     , LwPermissions::class);    
     Route::get('/roles-permissions', LwRolesPermissions::class);    
     Route::get('/users-permissions', LwUsersPermissions::class); 
+    Route::get('/web-socket-test'  , WebSocketTest::class); 
 
     Route::post('/autocomplete/user', [AutocompleteController::class, 'user'])->name('user-autocomplete');   
     Route::post('/autocomplete/permission', [AutocompleteController::class, 'permission'])->name('permission-autocomplete');   
