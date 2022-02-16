@@ -8,7 +8,7 @@
 
           </form>
           <!-- onclick="openModal(false)" -->
-          <button 
+          <button
               @click="isOpen = false"
               wire:click="setFormClose()"
               class="delete--button"

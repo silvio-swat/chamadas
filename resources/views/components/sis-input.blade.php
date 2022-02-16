@@ -56,11 +56,31 @@
 @if($tipo == "text")
     <div class="modal--form-input-div-1" {{ $disabled ?? ''}}>
         <div class="modal--form-input-div-2">
-            <label class="modal--form-label" for="grid-password">
+            <label class="modal--form-label">
+                {{ $label }}
+            </label>
+            
+            <input wire:model="{{ $modelField }}" {{ $method }} {{ $method2 }} class="modal--form-input"
+            id="{{$elementId ?? str_replace('.', '-', $modelField)}}" type="{{ $type ?? 'text'}}" placeholder="{{ $placeHolder}}"
+            name = "{{$elementId ?? $modelField}}"
+            {{ $disabled ?? ''}}>
+
+
+            
+            @error($modelField) <span class="error">{{ $message }}</span> @enderror
+            <p class="modal--form-p-error"></p>     
+        </div>
+    </div>
+@endIf
+
+@if($tipo == "number")
+    <div class="modal--form-input-div-1" {{ $disabled ?? ''}}>
+        <div class="modal--form-input-div-2">
+            <label class="modal--form-label">
                 {{ $label }}
             </label>
             <input wire:model="{{ $modelField }}" {{ $method }} {{ $method2 }} class="modal--form-input"
-            id="{{$elementId ?? str_replace('.', '-', $modelField)}}" type="{{ $type ?? 'text'}}" placeholder="{{ $placeHolder}}"
+            id="{{$elementId ?? str_replace('.', '-', $modelField)}}" type="{{ $type ?? 'number'}}" placeholder="{{ $placeHolder}}"
             name = "{{$elementId ?? $modelField}}"
             {{ $disabled ?? ''}}>
             @error($modelField) <span class="error">{{ $message }}</span> @enderror

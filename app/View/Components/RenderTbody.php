@@ -26,7 +26,7 @@ class RenderTbody extends Component
         $tdClass = 'modal--table-td',
         $id      = null,
         $lambda  = null,
-        $modelName = null)
+        $modelName = null,)
     {
         $this->acao      = $acao;
         $this->items     = $items;

@@ -57,7 +57,7 @@ class CrudComponent extends Component
     {
         $this->dispatchBrowserEvent('alert', 
                 ['type' => $type,  'message' => $msg]);
-    } 
+    }      
 
     protected function index()
     {
@@ -69,7 +69,7 @@ class CrudComponent extends Component
             return [];
         } else {
             return $newClass::all();
-        }     
+        }
     }  
 
     /**
@@ -85,7 +85,10 @@ class CrudComponent extends Component
         $this->type           = $type ? $type : $this->type;
         $this->formTitle      = "Novo";
         $classname            = $this->classNSpace . $this->type;
-        $newClass             = new $classname();     
+        $newClass             = new $classname();  
+        if($this->model){
+            $this->{$this->model} = $newClass;
+        }
         $this->setFormOpen();
 
         return $newClass;
@@ -99,12 +102,15 @@ class CrudComponent extends Component
         }        
         $this->type = $type;
         $classname             = $this->classNSpace . $type;
-        $newClass              = new $classname();  
+        $newClass              = new $classname(); 
+        $editClass             = $newClass::find($key);
         $this->formTitle       = "Editar";
-  
+        if($this->model){
+            $this->{$this->model} = $editClass;
+        }
         $this->setFormOpen();
         
-        return $newClass::find($key);
+        return $editClass;
     }     
 
    /**
@@ -114,7 +120,7 @@ class CrudComponent extends Component
      * @param model $model
      */       
     public function submit($model, $type)
-    {        
+    {
         $this->validate();
         $classname  = $this->classNSpace . $type;
         $class      = new $classname();

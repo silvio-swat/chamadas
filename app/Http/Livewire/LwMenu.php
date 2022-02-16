@@ -25,7 +25,7 @@ class LwMenu extends CrudComponent
     // Variaveis de Menu
     public Menu     $menuModel;
     public $menus = [];
-    public $menuPageId;   
+    public $menuPageId;
     // Variaveis de SubMenu
     public SubMenu  $subMenuModel;
     public $subMenus = [];
@@ -42,7 +42,7 @@ class LwMenu extends CrudComponent
         $this->permiComp = "menus";               
         $this->classNSpace = "App\\Models\\";
         $this->index();
-        $this->loadPemissionsSelect();          
+        $this->loadPemissionsSelect();
         $this->menuPageModel = new MenuPage();
         $this->menuModel     = new Menu();
         $this->subMenuModel  = new SubMenu();

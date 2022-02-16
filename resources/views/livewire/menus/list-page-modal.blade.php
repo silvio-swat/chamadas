@@ -78,7 +78,7 @@
                               <span>{{ $menuPage->order }}</span>
                           </td>    
                           <td class="modal--table-td">
-                            <span>{{ $menuPage->permission->name }}</span>
+                            <span>{{ $menuPage->permission->name ?? null}}</span>
                         </td>                             
                           <td class="modal--table-td">
                             <span><i class="{{ $menuPage->icon  }}"></i> {{ $menuPage->icon }}</span>

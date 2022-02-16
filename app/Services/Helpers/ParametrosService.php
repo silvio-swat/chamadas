@@ -1,6 +1,7 @@
 <?php
 namespace App\Services\Helpers;
 
+use App\Models\Fila;
 use App\Models\MenuPage;
 use App\Models\Param;
 use App\Services\Menu\MenuService;
@@ -14,6 +15,13 @@ class ParametrosService
         $this->srvMenu    = new MenuService();
     }
 
+    /**
+     * 
+     * Busca os parâmetros baseado em parâmetro
+     * @param array $select
+     * @param string $string
+     * @return string
+     */    
     public function getSelectArray($chave){
         $selectArray = [];
         $params = Param::where('chave', $chave)->get();
@@ -35,7 +43,7 @@ class ParametrosService
     }  
 
     /**
-     * Mensagem de toast
+     * Método para pegar a descrição de um array de select
      * @param array $select
      * @param string $string
      * @return string
@@ -50,6 +58,12 @@ class ParametrosService
         return null;
     }  
     
+    /**
+     * Monta um select de menus do sistema
+     * @param array $select
+     * @param string $string
+     * @return string
+     */    
     public function getSelectMenusArray(){
         $selectArray = [];
         $pages = MenuPage::all();
@@ -66,10 +80,41 @@ class ParametrosService
             $selectArray = [
                 'value'  => null,
                 'descri' => 'nenhum item encontrado'
-           ];            
+           ];
         }
         sort($selectArray);
 
         return $selectArray;
-    }      
+    }     
+    
+    /**
+     * Monta um select de filas
+     * @param array $select
+     * @param string $string
+     * @return string
+     */    
+    public function getSelectFilas(){
+        $selectArray = [];
+        $filas = Fila::all();
+        if(count($filas) > 0){
+            $selectArray[] = [
+                'value'  => null,
+                'descri' => 'Selecione uma Fila'
+            ];            
+            foreach($filas as $fila){
+                $selectArray[] = [
+                     'value'  => $fila->id,
+                     'descri' => $fila->nome
+                ];
+            }
+        } else {
+            $selectArray = [
+                'value'  => null,
+                'descri' => 'nenhum item encontrado'
+            ];
+        }
+        sort($selectArray);
+
+        return $selectArray;
+    }        
 }

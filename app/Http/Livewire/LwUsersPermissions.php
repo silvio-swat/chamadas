@@ -12,11 +12,11 @@ use Exception;
 class LwUsersPermissions extends CrudComponent
 {
 
-    public User         $userModel;
-    public Permission   $permissionModel;
-    public $selectUsers       = []; 
-    public $selectPermissions = []; 
-    public $users             = []; 
+    public User               $userModel;
+    public Permission         $permissionModel;
+    public $selectUsers       = [];
+    public $selectPermissions = [];
+    public $users             = [];
 
     public function render()
     {
@@ -25,12 +25,12 @@ class LwUsersPermissions extends CrudComponent
 
     public function mount() {
         parent::mount();
-        $this->permiComp       = "users-permissions";                   
+        $this->permiComp       = "users-permissions";
         $this->userModel       = new User();
         $this->permissionModel = new Permission();
         $this->index();
         $this->loadSelects();
-        $this->model = 'permissionModel';
+        $this->model           = 'permissionModel';
     }
 
     public function index()
@@ -46,8 +46,8 @@ class LwUsersPermissions extends CrudComponent
         $this->permissionModel  = parent::new($type);
         $this->userModel        = User::find($id);
         $this->formTitle        = "Vincular Papel com permissão";
-    }     
-    
+    }
+
     // Seta regras de formulario conforme lista e form new ou edit clicados por conseguinte
     protected function rules()
     {
