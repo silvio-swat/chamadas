@@ -1,6 +1,6 @@
 # Projeto: Sistema de Chamada de Senhas em PHP Laravel
 
-Este repositório contém o código-fonte de um sistema de gerenciamento de senhas, desenvolvido em PHP Laravel.
+Este repositório contém o código-fonte de um sistema de gerenciamento de senhas, desenvolvido em PHP Laravel. Contém Auth2 com Laravel Passport, Cadastro de Usuário, Papéis, Recursos, Filas, Menus Personalizado, uso de Web Sockets e muito mais.
 
 ## Descrição do Sistema
 
